@@ -1,10 +1,13 @@
 #include <QCoreApplication>
 #include <QDebug>
+#include <QUrl>
 
-#include "crawl.h"
+#include "crawler.h"
 #include "graph.h"
+#if 0
 #include "index.h"
 #include "search.h"
+#endif
 
 int
 main(int argc, char **argv)
@@ -12,14 +15,16 @@ main(int argc, char **argv)
     QCoreApplication app(argc, argv);
 
     qApp->setApplicationName(qApp->argv()[0]);
-    qWarning() << qApp->argc();
-    qWarning() << qApp->argv();
+    qWarning() << "arguments count" << qApp->argc();
+    qWarning() << "arguments vector" << qApp->argv();
+    qWarning() << "application name" << qApp->applicationName();
 
     QUrl url;
     Crawler crawl;
 
     Graph graph;
     crawl.setGraphContainer(&graph);
+#if 0
     Index index;
     crawl.setIndexContainer(&index);
     if (! crawl.crawlWeb(url))
@@ -35,7 +40,7 @@ main(int argc, char **argv)
     qWarning() << search.searchOrdered("Hummus");
     qWarning() << search.searchOrdered("the");
     qWarning() << search.searchOrdered("babaganoush");
+#endif
 
     return 0;
-//    return app.exec();
 }
