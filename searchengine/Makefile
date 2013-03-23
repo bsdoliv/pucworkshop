@@ -4,18 +4,15 @@ QMAKE=${QTDIR}/bin/qmake
 
 PROG=searchengine
 VERSION=0.1
-PACKAGE=${PROG}-${VERSION}.tgz
-QUICKPACKAGE=${PROG}-${VERSION}.zip
 
 QMAKEFILE=${PROG}.makefile
 QMAKEPRO=${PROG}.pro
-QMAKETESTSPRI=tests/tests.pri
 
 # dev build opts
 QMAKEFILE_OPTS+="TARGET=${PROG}"
 QMAKEFILE_OPTS+="OBJECTS_DIR=./.objs"
 QMAKEFILE_OPTS+="MOC_DIR=./.mocs"
-QMAKEFILE_OPTS+="CONFIG += debug"
+#QMAKEFILE_OPTS+="CONFIG += debug"
 QMAKEFILE_OPTS+="INCLUDEPATH += ${INCLUDEPATH}"
 QMAKEFILE_OPTS+="QMAKE_CXXFLAGS_WARN_ON=-w"
 QMAKEFILE_OPTS+="QMAKE_CFLAGS_WARN_ON=-w"
@@ -36,27 +33,28 @@ HDRS=*.h
 all: build
 
 .PHONY: build
-build: ${PROG} ${PROG}-release
+build: ${PROG}
 
 .PHONY: ${PROG}
 ${PROG}: ${QMAKEFILE}
 	${MAKE} -f $<
 
-${PROG}-release: ${PROG}
-	strip --strip-unneeded ${PROG} -o $@
-
-${QMAKETESTSPRI}:
-	echo >> $@ "CONFIG += qtestlib"
-	echo >> $@ "SRCS=*.cpp"
-
 ${QMAKEFILE}: ${QMAKEPRO}
 	${QMAKE} -makefile ${QMAKEFILE_OPTS} -o $@ $<
-	echo >> $@ "include(${QMAKETESTSPRI})"
 
 ${QMAKEPRO}: Makefile
 	${QMAKE} -project ${QMAKEPRO_OPTS} -o $@ $<
 
-.PHONY: distclean
+.PHONY: tests
+tests:
+	${MAKE} -C tests build
+	${MAKE} -C tests run
+
+.PHONY: testsclean
+testsclean:
+	${MAKE} -C tests distclean
+
+.PHONY: distclean testsclean
 distclean: clean prunebuild
 	-[ -d .objs ] && \
 		rmdir .objs
@@ -67,7 +65,8 @@ distclean: clean prunebuild
 clean:
 	-[ -e ${QMAKEFILE} ] && \
 		${MAKE} -f ${QMAKEFILE} clean
-	-rm -fv ${PROG}-release
+	-[ -d ${PROG}.app ] && \
+		rm -rfv ${PROG}.app
 	-rm -fv ${PROG}
 	-rm -fv ui_*.h
 
@@ -75,9 +74,5 @@ clean:
 prunebuild:
 	-rm -fv ${QMAKEFILE}
 	-rm -fv ${QMAKEPRO}
-
-.PHONY: build
-build:
-	@true
 
 # vim: set tw=78:

@@ -12,37 +12,33 @@ TESTS_TARGETS=$(TESTS_SOURCES:.cpp=)
 QMAKEFILES=$(TESTS_SOURCES:.cpp=.makefile)
 QMAKEPROS=$(TESTS_SOURCES:.cpp=.pro)
 
-all: build-tests run-tests
+all: build 
+#run
 
-.PHONY: build-tests
-build-tests: ${TESTS_TARGETS}
+.PHONY: build
+build: ${TESTS_TARGETS}
 
 ${TESTS_TARGETS}: ${QMAKEFILES} ${TESTS_SOURCES}
 	${MAKE} -f $@.makefile
 
-.PHONY: run-tests
-run-tests: all
-	LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBENGINEDIR} ./run-tests.sh
+.PHONY: run
+run: build
+	./run-tests.sh
 
+#		"TARGET=${TEST}" 
 ${QMAKEFILES}: ${QMAKEPROS}
 	${QMAKE} -makefile \
 		$(@:.makefile=.pro) \
-		"TARGET=${TEST}" \
-		"INCLUDEPATH+=/opt/google.sparse/include" \
-		"INCLUDEPATH+=${LIBENGINEDIR}" \
-                "LIBS+=-ldaimeengine -L${LIBENGINEDIR}" \
 		"OBJECTS_DIR=./.objs" \
 		"MOC_DIR=./.mocs" \
 		"QT += sql" \
 		"QT -= gui" \
 		-o $@
 
+#		"CONFIG += debug" 
 ${QMAKEPROS}: Makefile
 	${QMAKE} -project \
 		"CONFIG += qtestlib" \
-		"CONFIG += debug" \
-		"DEPENDPATH += ${LIBENGINEDIR}" \
-		"INCLUDEPATH += ${LIBENGINEDIR}" \
 		-nopwd \
 		-norecursive \
 		$(@:.pro=.cpp) \
@@ -54,7 +50,7 @@ ignoreup: .cvsignore
 	svn propset svn:ignore -F $< .
 
 .PHONY: distclean
-distclean: cleanlib clean prunebuild
+distclean: clean prunebuild
 	-[ -d .objs ] && \
 		rmdir .objs
 	-[ -d .mocs ] && \
@@ -67,6 +63,10 @@ clean:
 		${MAKE} -f $${i} clean; \
 	done
 	-rm -fv ${TESTS_TARGETS}
+	-for i in ${TESTS_TARGETS}; do \
+		[ -d $${i}.app ] && \
+			rm -rfv $${i}.app ;\
+	done
 
 .PHONY: prunebuild
 prunebuild:
