@@ -4,8 +4,8 @@
 
 #include "crawler.h"
 #include "graph.h"
-#if 0
 #include "index.h"
+#if 0
 #include "search.h"
 #endif
 
@@ -24,11 +24,11 @@ main(int argc, char **argv)
 
     Graph graph;
     crawl.setGraphContainer(&graph);
-#if 1
     Index index;
     crawl.setIndexContainer(&index);
     if (! crawl.crawlWeb(url))
-        qFatal() << crawl.lastError();
+        qFatal("%s", qPrintable(crawl.lastError()));
+#if 0
 
     Ranks ranks;
     graph.computeRanks(&ranks);

@@ -5,11 +5,8 @@
 #include <QStringList>
 #include <QMap>
 
-#if 1
-class Graph : public QMap<QString, QStringList>
-{
-};
-#endif
+class LinksList : public QList<QUrl> { };
+class Graph : public QMap<QUrl, LinksList> { };
 
 //typedef QMap<QString, QStringList> Graph;
 

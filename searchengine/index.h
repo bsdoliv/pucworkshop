@@ -1,12 +1,12 @@
 #ifndef INDEX_H
 #define INDEX_H
 
-#include <QString>
+#include <QUrl>
 #include <QStringList>
 #include <QMap>
 
 #if 1
-class Index : public QMap<QString, QStringList>
+class Index : public QMap<QUrl, QByteArray>
 {
 };
 #endif

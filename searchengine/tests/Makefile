@@ -2,7 +2,7 @@
 #	$Id$
 
 # qt config
-#export QTDIR?=/opt/qt450
+export QTDIR?=/usr
 #export LIBENGINEDIR?=../corelib
 QMAKE=${QTDIR}/bin/qmake
 
@@ -32,6 +32,7 @@ ${QMAKEFILES}: ${QMAKEPROS}
 		"OBJECTS_DIR=./.objs" \
 		"MOC_DIR=./.mocs" \
 		"QT += sql" \
+		"QT += network" \
 		"QT -= gui" \
 		-o $@
 

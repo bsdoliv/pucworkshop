@@ -16,7 +16,7 @@ QMAKEFILE_OPTS+="MOC_DIR=./.mocs"
 QMAKEFILE_OPTS+="INCLUDEPATH += ${INCLUDEPATH}"
 QMAKEFILE_OPTS+="QMAKE_CXXFLAGS_WARN_ON=-w"
 QMAKEFILE_OPTS+="QMAKE_CFLAGS_WARN_ON=-w"
-QMAKEFILE_OPTS+="QT -= network"
+QMAKEFILE_OPTS+="QT += network"
 QMAKEFILE_OPTS+="QT -= sql"
 QMAKEFILE_OPTS+="QT -= gui"
 QMAKEFILE_OPTS+="QT -= xml"
@@ -54,8 +54,8 @@ tests:
 testsclean:
 	${MAKE} -C tests distclean
 
-.PHONY: distclean testsclean
-distclean: clean prunebuild
+.PHONY: distclean 
+distclean: testsclean clean prunebuild
 	-[ -d .objs ] && \
 		rmdir .objs
 	-[ -d .mocs ] && \

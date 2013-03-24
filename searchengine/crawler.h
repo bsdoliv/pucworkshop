@@ -5,6 +5,7 @@ class Graph;
 class Index;
 class QUrl;
 class CrawlerPrivate;
+class QString;
 class Crawler
 {
 public:
@@ -13,7 +14,7 @@ public:
 
     void setGraphContainer(Graph *);
     void setIndexContainer(Index *);
-    void crawlWeb(const QUrl &url);
+    bool crawlWeb(const QUrl &url);
     const QString & lastError();
 
 private:
