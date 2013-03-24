@@ -24,11 +24,11 @@ main(int argc, char **argv)
 
     Graph graph;
     crawl.setGraphContainer(&graph);
-#if 0
+#if 1
     Index index;
     crawl.setIndexContainer(&index);
     if (! crawl.crawlWeb(url))
-        qFatal() << craw.lastError();
+        qFatal() << crawl.lastError();
 
     Ranks ranks;
     graph.computeRanks(&ranks);
