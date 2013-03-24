@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LIBENGINEDIR}
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
 for i in test*; do
 	if [ -x ${i} -a x${i} != xrun-tests.sh ]; then
 	    case "$1" in
