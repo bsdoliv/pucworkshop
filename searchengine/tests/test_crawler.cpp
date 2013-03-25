@@ -49,7 +49,7 @@ TestCrawler::crawlWeb_data()
     QTest::newRow("SUCCESS_CASE") 
         << QUrl("http://www.udacity.com/cs101x/index.html") 
         << "no error"
-        << 5 
+        << 44
         << gph;
 #if 0
     QTest::newRow("FAIL_CASE") 
@@ -76,6 +76,7 @@ TestCrawler::crawlWeb()
 
     QFETCH(int, index_size);
     QCOMPARE(index.size(), index_size);
+    //lWarning() << index;
 
     QFETCH(Graph, graph_result);
     QCOMPARE(graph.size(), graph_result.size());

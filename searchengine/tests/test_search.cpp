@@ -1,8 +1,10 @@
 #include <QtTest/QtTest>
 #include <QObject>
 
+#include "../crawler.h"
 #include "../index.h"
 #include "../graph.h"
+#include "../search.h"
 
 Q_DECLARE_METATYPE(Ranks)
 Q_DECLARE_METATYPE(Index)
@@ -14,14 +16,14 @@ public:
     TestSearch() { };
     virtual ~TestSearch() { };
 private slots:
-    void computeSearch_data();
-    void computeSearch();
+    void searchOrdered_data();
+    void searchOrdered();
 };
 
 void
-TestSearch::computeSearch_data()
+TestSearch::searchOrdered_data()
 {
-    QTest::addColumn<Index>("index");
+#if 0
     QTest::addColumn<Ranks>("ranks");
 
     Graph gph;
@@ -46,31 +48,50 @@ TestSearch::computeSearch_data()
     value.clear();
 
     Ranks ranks;
-    graph.computeRanks(&ranks);
+    gph.computeRanks(&ranks);
 
-//    Index idx;
-//    idx
-
+    Index idx;
 
     QTest::newRow("SUCCESS_CASE") 
         << idx
         << ranks;
+#endif
 }
 
 void
 TestSearch::searchOrdered()
 {
-    QFETCH(Graph, graph);
+    Crawler crawl;
 
+    Graph graph;
+    crawl.setGraphContainer(&graph);
+
+    Index index;
+    crawl.setIndexContainer(&index);
+
+    QUrl url("http://www.udacity.com/cs101x/index.html");
+    crawl.crawlWeb(url);
+
+    Ranks ranks;
+    graph.computeRanks(&ranks);
+
+    qWarning() << "searching" << Search::searchOrdered(index, ranks, "hummus");
+    qWarning() << "ranks" << ranks;
+    qWarning() << "index" << index.size();
+    qWarning() << "graph" << graph.size();
+
+#if 0
     Graph::const_iterator page;
     for (page = graph.begin(); page != graph.end(); ++page) {
         foreach (const QUrl &node, *page)
             qWarning() << "page" << page.key() << "node" << node.toString();
     }
 
+    QFETCH(Ranks, ranks);
     Ranks::iterator it;
     for (it = ranks.begin(); it != ranks.end(); ++it)
         qWarning() << "key" << it.key() << "value" << it.value();
+#endif
 }
 
 QTEST_MAIN(TestSearch)
