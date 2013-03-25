@@ -75,12 +75,12 @@ TestSearch::searchOrdered()
     Ranks ranks;
     graph.computeRanks(&ranks);
 
+#if 0
     qWarning() << "searching" << Search::searchOrdered(index, ranks, "hummus");
     qWarning() << "ranks" << ranks;
     qWarning() << "index" << index.size();
     qWarning() << "graph" << graph.size();
 
-#if 0
     Graph::const_iterator page;
     for (page = graph.begin(); page != graph.end(); ++page) {
         foreach (const QUrl &node, *page)

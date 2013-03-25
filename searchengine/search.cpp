@@ -7,8 +7,6 @@ Search::searchOrdered(const Index &index,
                       const Ranks &ranks,
                       const QString &word)
 {
-//    if (
-
     LinksList ranked_list;
     Search search;
     LinksList list = search.lookup(index, word.toAscii());

@@ -18,25 +18,31 @@ main(int argc, char **argv)
     qWarning() << "application name" << qApp->applicationName();
 
     QUrl url;
+    url.setUrl(qApp->argv()[1]);
     Crawler crawl;
 
     Graph graph;
     crawl.setGraphContainer(&graph);
+
     Index index;
     crawl.setIndexContainer(&index);
+
     if (! crawl.crawlWeb(url))
         qFatal("%s", qPrintable(crawl.lastError()));
 
     Ranks ranks;
     graph.computeRanks(&ranks);
 
-    qWarning() << Search::searchOrdered(index, ranks, "hummus");
+    foreach (QString w, QStringList() 
+             << "crawl"
+             << "Hummus"
+             << "the"
+             << "babaganoush")
+        qWarning() << "searching" << w << Search::searchOrdered(index, ranks, w); 
 
-#if 0
-    qWarning() << search.searchOrdered("Hummus");
-    qWarning() << search.searchOrdered("the");
-    qWarning() << search.searchOrdered("babaganoush");
-#endif
+    qWarning() << ranks;
+    qWarning() << graph;
+    qWarning() << index;
 
     return 0;
 }
