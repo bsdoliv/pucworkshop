@@ -28,11 +28,11 @@ main(int argc, char **argv)
     crawl.setIndexContainer(&index);
     if (! crawl.crawlWeb(url))
         qFatal("%s", qPrintable(crawl.lastError()));
-#if 0
 
     Ranks ranks;
     graph.computeRanks(&ranks);
 
+#if 0
     Search search;
     search.setIndex(index);
     search.setRanks(ranks);

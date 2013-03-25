@@ -6,6 +6,8 @@
 #include <QMap>
 #include <QUrl>
 
+class Ranks : public QMap<QUrl, qreal> { };
+
 class LinksList : public QList<QUrl> 
 { 
 public:
@@ -16,8 +18,10 @@ public:
     }
 };
 
-class Graph : public QMap<QUrl, LinksList> { };
-
-//typedef QMap<QString, QStringList> Graph;
+class Graph : public QMap<QUrl, LinksList> 
+{ 
+public:
+    void computeRanks(Ranks *ranks);
+};
 
 #endif // !GRAPH_H

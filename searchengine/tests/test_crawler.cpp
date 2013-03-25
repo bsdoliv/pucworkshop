@@ -45,7 +45,6 @@ TestCrawler::crawlWeb_data()
     key = QUrl("http://www.udacity.com/cs101x/walking.html");
     value << "http://www.udacity.com/cs101x/index.html";
     gph.insert(key, value);
-    value.clear();
 
     QTest::newRow("SUCCESS_CASE") 
         << QUrl("http://www.udacity.com/cs101x/index.html") 
