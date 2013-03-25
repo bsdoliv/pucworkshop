@@ -16,6 +16,12 @@ public:
         this->append(QUrl(s));
         return *this;
     }
+
+    LinksList &operator<<(const QUrl &u)
+    {
+        this->append(u);
+        return *this;
+    }
 };
 
 class Graph : public QMap<QUrl, LinksList> 

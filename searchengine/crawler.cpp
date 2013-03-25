@@ -74,7 +74,12 @@ CrawlerPrivate::addLinksToGraph(const QUrl &u, const LinksList &llist)
 void 
 CrawlerPrivate::addPageToIndex(const QUrl &u, const QByteArray &content)
 {
-    index->insert(u, content);
+    foreach (const QByteArray &word, content.split(' ')) {
+        if (index->contains(word))
+            (*index)[word] << u;
+        else
+            index->insert(word, LinksList() << u);
+    }
 }
 
 bool

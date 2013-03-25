@@ -2,15 +2,12 @@
 #define INDEX_H
 
 #include <QUrl>
-#include <QStringList>
+#include <QByteArray>
 #include <QMap>
 
-#if 1
-class Index : public QMap<QUrl, QByteArray>
-{
-};
-#endif
+// LinksList
+#include "graph.h"
 
-//typedef QMap<QString, QStringList> Graph;
+class Index : public QMap<QByteArray, LinksList> { };
 
 #endif // !INDEX_H

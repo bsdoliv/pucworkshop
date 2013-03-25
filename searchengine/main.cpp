@@ -5,9 +5,7 @@
 #include "crawler.h"
 #include "graph.h"
 #include "index.h"
-#if 0
 #include "search.h"
-#endif
 
 int
 main(int argc, char **argv)
@@ -32,11 +30,9 @@ main(int argc, char **argv)
     Ranks ranks;
     graph.computeRanks(&ranks);
 
-#if 0
-    Search search;
-    search.setIndex(index);
-    search.setRanks(ranks);
+    qWarning() << Search::searchOrdered(index, ranks, "hummus");
 
+#if 0
     qWarning() << search.searchOrdered("Hummus");
     qWarning() << search.searchOrdered("the");
     qWarning() << search.searchOrdered("babaganoush");

@@ -29,9 +29,9 @@ run: build
 ${QMAKEFILES}: ${QMAKEPROS}
 	${QMAKE} -makefile \
 		$(@:.makefile=.pro) \
-		"OBJECTS_DIR=./.objs" \
-		"MOC_DIR=./.mocs" \
-		"QT += sql" \
+		"OBJECTS_DIR=../.objs" \
+		"MOC_DIR=../.mocs" \
+		"QT -= sql" \
 		"QT += network" \
 		"QT -= gui" \
 		-o $@
