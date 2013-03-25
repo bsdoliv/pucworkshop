@@ -3,7 +3,6 @@
 
 # qt config
 export QTDIR?=/usr
-#export LIBENGINEDIR?=../corelib
 QMAKE=${QTDIR}/bin/qmake
 
 TESTS_SOURCES=$(shell ls test*.cpp)
@@ -18,6 +17,7 @@ all: build
 .PHONY: build
 build: ${TESTS_TARGETS}
 
+.PHONY: ${TESTS_TARGETS}
 ${TESTS_TARGETS}: ${QMAKEFILES} ${TESTS_SOURCES}
 	${MAKE} -f $@.makefile
 
@@ -44,11 +44,6 @@ ${QMAKEPROS}: Makefile
 		-norecursive \
 		$(@:.pro=.cpp) \
 		-o $@
-
-# updates the ignore list on repo
-.PHONY: ignoreup
-ignoreup: .cvsignore
-	svn propset svn:ignore -F $< .
 
 .PHONY: distclean
 distclean: clean prunebuild

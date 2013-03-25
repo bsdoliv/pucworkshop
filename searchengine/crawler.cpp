@@ -2,6 +2,7 @@
 #include "graph.h"
 #include "index.h"
 
+#include <QDebug>
 #include <QCoreApplication>
 #include <QUrl>
 #include <QNetworkAccessManager>
@@ -34,8 +35,16 @@ CrawlerPrivate::getNextUrl(const QByteArray &content, QUrl *url)
         return -1;
     }
     int start_quote = content.indexOf('"', start_link);
-    int end_quote = content.indexOf('"', start_quote + 1);
-    url->setUrl(content.mid(start_quote, end_quote));
+    start_quote++;
+    int end_quote = content.indexOf('"', start_quote);
+#if 0
+    qWarning() 
+    << "start_link" << start_link
+    << "start_quote" << start_quote
+    << "end_quote" << end_quote
+    << "content.mid" << content.mid(start_quote, end_quote - start_quote);
+#endif
+    url->setUrl(content.mid(start_quote, end_quote - start_quote));
     return end_quote;
 }
 
@@ -46,19 +55,20 @@ CrawlerPrivate::getAllLinks(const QByteArray &content, LinksList *llist)
     while (true) {
         QUrl url;
         int endpos = getNextUrl(content_copy, &url);
-        if (url.isEmpty()) {
-            llist->append(url);
-            // move buffer forward
-            content_copy = content_copy.mid(endpos, -1);
-        } else
+        if (endpos == -1) 
             break;
+
+        llist->append(url);
+        // move buffer forward
+        content_copy = content_copy.mid(endpos, -1);
     }
 }
 
 void 
 CrawlerPrivate::addLinksToGraph(const QUrl &u, const LinksList &llist)
 {
-    graph->insert(u, llist);
+    if (! u.isEmpty())
+        graph->insert(u, llist);
 }
 
 void 
@@ -141,8 +151,14 @@ Crawler::crawlWeb(const QUrl &seed)
         // extract links, append to graph
         LinksList links;
         d->getAllLinks(content, &links);
-        d->addLinksToGraph(url, links);
+        if (links.size() > 0)
+            d->addLinksToGraph(url, links);
+        foreach (QUrl u, links)
+            crawl_todo.enqueue(u);
+
+        crawl_done.append(url);
     }
+
 
     return true;
 }
