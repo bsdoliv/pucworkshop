@@ -37,12 +37,15 @@ main(int argc, char **argv)
              << "crawl"
              << "Hummus"
              << "the"
+             << "good"
              << "babaganoush")
         qWarning() << "searching" << w << Search::searchOrdered(index, ranks, w); 
 
     qWarning() << ranks;
     qWarning() << graph;
     qWarning() << index;
+#if 0
+#endif
 
     return 0;
 }

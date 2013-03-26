@@ -49,14 +49,23 @@ TestSearch::searchOrdered()
     crawl.setIndexContainer(&index);
 
     QUrl url("http://www.udacity.com/cs101x/index.html");
+
+#if 0
+    CrawlerCache cache;
+    crawl.setCache(&cache);
+#endif
+
     crawl.crawlWeb(url);
 
     Ranks ranks;
     graph.computeRanks(&ranks);
+
     QFETCH(LinksList, result_set_Kick);
     QCOMPARE(result_set_Kick, Search::searchOrdered(index, ranks, "Kick"));
+
     QFETCH(LinksList, result_set_learn);
     QCOMPARE(result_set_learn, Search::searchOrdered(index, ranks, "learn"));
+
     QFETCH(LinksList, result_set_good);
     QCOMPARE(result_set_good, Search::searchOrdered(index, ranks, "good"));
 }
