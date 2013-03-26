@@ -6,8 +6,7 @@
 #include "../graph.h"
 #include "../search.h"
 
-Q_DECLARE_METATYPE(Ranks)
-Q_DECLARE_METATYPE(Index)
+Q_DECLARE_METATYPE(LinksList)
 
 class TestSearch : public QObject
 {
@@ -23,8 +22,22 @@ private slots:
 void
 TestSearch::searchOrdered_data()
 {
+    QTest::addColumn<LinksList>("result_set_Kick");
+    QTest::addColumn<LinksList>("result_set_learn");
+    QTest::addColumn<LinksList>("result_set_good");
+
+
+    QTest::newRow("SUCCESS_CASE") 
+        // result_set_Kick
+        << (LinksList() << "http://www.udacity.com/cs101x/kicking.html")
+        // result_set_learn
+        << (LinksList() << "http://www.udacity.com/cs101x/index.html")
+        << (LinksList() 
+            << "http://www.udacity.com/cs101x/index.html"
+            << "http://www.udacity.com/cs101x/crawling.html");
+
 #if 0
-    QTest::addColumn<Ranks>("ranks");
+    QTest::addColumn<Ranks>("ranks_template");
 
     Graph gph;
     QUrl key;
@@ -47,13 +60,7 @@ TestSearch::searchOrdered_data()
     gph.insert(key, value);
     value.clear();
 
-    Ranks ranks;
-    gph.computeRanks(&ranks);
-
-    Index idx;
-
     QTest::newRow("SUCCESS_CASE") 
-        << idx
         << ranks;
 #endif
 }
@@ -74,20 +81,37 @@ TestSearch::searchOrdered()
 
     Ranks ranks;
     graph.computeRanks(&ranks);
-
+    QFETCH(LinksList, result_set_Kick);
+    QCOMPARE(result_set_Kick, Search::searchOrdered(index, ranks, "Kick"));
+    QFETCH(LinksList, result_set_learn);
+    QCOMPARE(result_set_learn, Search::searchOrdered(index, ranks, "learn"));
+    QFETCH(LinksList, result_set_good);
+    QCOMPARE(result_set_good, Search::searchOrdered(index, ranks, "good"));
+ 
 #if 0
-    qWarning() << "searching" << Search::searchOrdered(index, ranks, "hummus");
+    qWarning() << "searching hummus" << Search::searchOrdered(index, ranks,
+                                                              "hummus");
+    qWarning() << "searching learn" << Search::searchOrdered(index, ranks,
+                                                             "learn");
+    qWarning() << "searching Kick" << Search::searchOrdered(index, ranks,
+                                                             "Kick");
+    qWarning() << "searching kicking" << Search::searchOrdered(index, ranks,
+                                                             "kicking");
+    qWarning() << "searching html" << Search::searchOrdered(index, ranks,
+                                                             "html");
     qWarning() << "ranks" << ranks;
     qWarning() << "index" << index.size();
     qWarning() << "graph" << graph.size();
+#endif
 
+#if 0
     Graph::const_iterator page;
     for (page = graph.begin(); page != graph.end(); ++page) {
         foreach (const QUrl &node, *page)
             qWarning() << "page" << page.key() << "node" << node.toString();
     }
 
-    QFETCH(Ranks, ranks);
+    QFETCH(Ranks, ranks_template);
     Ranks::iterator it;
     for (it = ranks.begin(); it != ranks.end(); ++it)
         qWarning() << "key" << it.key() << "value" << it.value();
