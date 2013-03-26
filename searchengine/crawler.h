@@ -21,6 +21,8 @@ public:
     bool crawlWeb(const QUrl &url);
     const QString & lastError();
 
+    const CrawlerCache * cache();
+
 private:
     CrawlerPrivate *d;    
 };

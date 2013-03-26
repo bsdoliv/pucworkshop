@@ -173,7 +173,6 @@ Crawler::crawlWeb(const QUrl &seed)
         crawl_done.append(url);
     }
 
-
     return true;
 }
 
@@ -181,6 +180,12 @@ const QString &
 Crawler::lastError()
 {
     return d->last_error;
+}
+
+const CrawlerCache *
+Crawler::cache()
+{
+    return d->cache;
 }
 
 

@@ -5,6 +5,7 @@
 #include "../graph.h"
 #include "../index.h"
 #include "../crawlercache.h"
+#include "cachefiller.h"
 
 Q_DECLARE_METATYPE(Graph);
 
@@ -24,13 +25,19 @@ public:
     virtual ~TestCrawler() { };
 public slots:
     void initTestCase();
-    void cleanupTestCase() { };
+    void cleanupTestCase();
 private slots:
     void crawlWeb_data();
     void crawlWeb();
 private:
     struct Foo d;
 };
+
+void
+TestCrawler::cleanupTestCase()
+{
+    d.cache.clear();
+}
 
 void
 TestCrawler::initTestCase()
@@ -55,50 +62,7 @@ TestCrawler::initTestCase()
     value << "http://www.udacity.com/cs101x/index.html";
     d.gph.insert(key, value);
 
-    // init cache
-    d.cache.insert(QUrl("http://www.udacity.com/cs101x/flying.html"), new QByteArray(
-        "<html> \
-        <body> \
-        The magic words are Squeamish Ossifrage! \
-        </body> \
-        </html>"));
-     
-    d.cache.insert(QUrl("http://www.udacity.com/cs101x/walking.html"), new QByteArray(
-        "<html> \
-        <body>              \
-        I can't get enough  \
-        <a href=\"http://www.udacity.com/cs101x/index.html\">crawling</a>! \
-        </body>                                                            \
-        </html>"));
- 
-    d.cache.insert(QUrl("http://www.udacity.com/cs101x/index.html"), new QByteArray(
-        "<html> \
-        <body> \
-        This is a test page for learning to crawl! \
-        <p> \
-        It is a good idea to  \
-        <a href=\"http://www.udacity.com/cs101x/crawling.html\">learn to crawl</a> \
-        before you try to \
-        <a href=\"http://www.udacity.com/cs101x/walking.html\">walk</a> or \
-        <a href=\"http://www.udacity.com/cs101x/flying.html\">fly</a>.\
-        </p>\
-        </body>\
-        </html>"));
- 
-    d.cache.insert(QUrl("http://www.udacity.com/cs101x/kicking.html"), new QByteArray(
-        "<html>\
-        <body>\
-        <b>Kick! Kick! Kick!</b>\
-        </body>\
-        </html>"));
- 
-    d.cache.insert(QUrl("http://www.udacity.com/cs101x/crawling.html"), new QByteArray(
-        "<html>\
-        <body>\
-        I have not learned to crawl yet, but I am quite good at \
-        <a href=\"http://www.udacity.com/cs101x/kicking.html\">kicking</a>.\
-        </body>\
-        </html>"));
+    cacheFiller(&d.cache);
 
 #if 0
     foreach (const QUrl &u, d.cache.keys()) {
