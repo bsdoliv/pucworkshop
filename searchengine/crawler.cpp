@@ -37,13 +37,6 @@ CrawlerPrivate::getNextUrl(const QByteArray &content, QUrl *url)
     int start_quote = content.indexOf('"', start_link);
     start_quote++;
     int end_quote = content.indexOf('"', start_quote);
-#if 0
-    qWarning() 
-    << "start_link" << start_link
-    << "start_quote" << start_quote
-    << "end_quote" << end_quote
-    << "content.mid" << content.mid(start_quote, end_quote - start_quote);
-#endif
     url->setUrl(content.mid(start_quote, end_quote - start_quote));
     return end_quote;
 }
@@ -99,14 +92,6 @@ CrawlerPrivate::getPage(const QUrl &url, QByteArray *response)
     QObject::connect(reply, SIGNAL(readyRead()), &loop, SLOT(quit()));
     loop.exec();
 
-
-#if 0
-    qWarning() << "url" << qPrintable(reply->url().toString());
-    qWarning() << "operation" << reply->operation();
-    qWarning() << "buffer size" << reply->readBufferSize();
-    qWarning() << "buffer" << reply->readAll();
-    qWarning() << "errorString" << reply->errorString();
-#endif
     response->clear();
     response->append(reply->readAll());
     reply->deleteLater();

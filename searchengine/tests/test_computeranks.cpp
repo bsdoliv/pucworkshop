@@ -52,9 +52,12 @@ TestComputeRanks::computeRanks_data()
     value.clear();
 
     Ranks template_ranks;
-    template_ranks[QUrl("http://www.udacity.com/cs101x/crawling.html")] = qreal(0.0666667);
-    template_ranks[QUrl("http://www.udacity.com/cs101x/index.html")] = qreal(0.152622);
-    template_ranks[QUrl("http://www.udacity.com/cs101x/walking.html")] = qreal(0.107444);
+    template_ranks[QUrl("http://www.udacity.com/cs101x/crawling.html")] 
+        = qreal(0.0666667);
+    template_ranks[QUrl("http://www.udacity.com/cs101x/index.html")] 
+        = qreal(0.152622);
+    template_ranks[QUrl("http://www.udacity.com/cs101x/walking.html")] 
+        = qreal(0.107444);
 
     QTest::newRow("SUCCESS_CASE_ROW")
         << gph
@@ -70,11 +73,6 @@ TestComputeRanks::computeRanks()
     Ranks ranks;
     template_graph.computeRanks(&ranks);
 
-#if 0
-    qWarning() << endl << ranks;
-    qWarning() << endl << template_ranks;
-#endif
-
     QCOMPARE(ranks.size(), template_ranks.size());
 
     Ranks::iterator it;
@@ -82,29 +80,12 @@ TestComputeRanks::computeRanks()
     for (it = ranks.begin(), template_it = template_ranks.begin(); 
          it != ranks.end(); 
          ++it, ++template_it) {
-#if 0
-        qWarning() << "key" << it.key() << "value" << it.value();
-        qWarning() << "key" << template_it.key() << "value" << template_it.value();
-        qWarning() << "minor" << qMin(value, 1.0);
-        qWarning() << "copy" << value << template_value;
-        qWarning() << "fuzzy" << qFuzzyCompare(value, template_value);
-        qWarning() << "multi" << (100.0 * it.value()) << (100.0 * template_it.value());
-        qWarning() << "fuzzy" << qFuzzyCompare(0.0666667, 0.0666667);
-        qWarning() << "fuzzy" << qFuzzyCompare(it.value(), it.value());
-        qWarning() << "fuzzy" << qFuzzyCompare(template_it.value(), template_it.value());
-        qWarning() << "fuzzy" << qFuzzyCompare(100.0 * it.value(), 100.0 * template_it.value());
-
-#endif
         double value(it.value());
         double template_value(template_it.value());
         // rounding before comparing
         if (qFuzzyCompare(qMin(value, 1.0), value)) {
             value = round(value);
             template_value = round(template_value);
-#if 0
-            ::fprintf(stderr,"*** %.15f\n", value);
-            ::fprintf(stderr,"*** %.15f\n", template_value);
-#endif
         }
         QCOMPARE(it.key(), template_it.key());
         QVERIFY(qFuzzyCompare(value, template_value));

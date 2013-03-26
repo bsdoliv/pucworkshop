@@ -49,11 +49,6 @@ TestCrawler::crawlWeb_data()
         << QUrl("http://www.udacity.com/cs101x/index.html") 
         << "no error"
         << gph;
-#if 0
-    QTest::newRow("FAIL_CASE") 
-        << QUrl("http://www.udacity.com/cs101x/404.html") 
-        << "fail to retrieve page 404";
-#endif
 }
 
 void
@@ -72,39 +67,11 @@ TestCrawler::crawlWeb()
     QFETCH(QString, error_message);
     QCOMPARE(crawl.lastError(), error_message);
 
-#if 0
-    for (Index::iterator it = index.begin(); it != index.end(); ++it)
-        qWarning() << it.key() << it.value().size();
-#endif
     QCOMPARE(index.size(), 54);
 
     QFETCH(Graph, graph_result);
     QCOMPARE(graph.size(), graph_result.size());
     QCOMPARE(graph, graph_result);
-
-#if 0
-    Graph::const_iterator it;
-    Graph::const_iterator it_res;
-    for (it = graph.begin();
-         it != graph.end(); 
-         ++it) {
-         qWarning() << "it" << *it;
-//         qWarning() << "it_res" << *it_res;
-         #if 0
-        foreach (const QUrl &u, *it)
-            qWarning() << "link" << it.key() << "url" << u.toString();
-            qWarning() << "link" << it_res.key() << "url" << u.toString();
-            #endif
-    }
-
-    qWarning() << "";
-
-    for (it = graph_result.begin(); it != graph_result.end(); ++it) {
-        qWarning() << "it_res" << *it;
-        //foreach (const QUrl &u, *it)
-            //qWarning() << "link" << it.key() << "url" << u.toString();
-    }
-#endif
 }
 
 QTEST_MAIN(TestCrawler)

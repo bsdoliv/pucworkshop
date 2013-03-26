@@ -35,34 +35,6 @@ TestSearch::searchOrdered_data()
         << (LinksList() 
             << "http://www.udacity.com/cs101x/index.html"
             << "http://www.udacity.com/cs101x/crawling.html");
-
-#if 0
-    QTest::addColumn<Ranks>("ranks_template");
-
-    Graph gph;
-    QUrl key;
-    LinksList value;
-
-    key = QUrl("http://www.udacity.com/cs101x/crawling.html");
-    value << "http://www.udacity.com/cs101x/kicking.html";
-    gph.insert(key, value);
-    value.clear();
-
-    key = QUrl("http://www.udacity.com/cs101x/index.html");
-    value   << "http://www.udacity.com/cs101x/crawling.html"
-            << "http://www.udacity.com/cs101x/walking.html"
-            << "http://www.udacity.com/cs101x/flying.html";
-    gph.insert(key, value);
-    value.clear();
-    
-    key = QUrl("http://www.udacity.com/cs101x/walking.html");
-    value << "http://www.udacity.com/cs101x/index.html";
-    gph.insert(key, value);
-    value.clear();
-
-    QTest::newRow("SUCCESS_CASE") 
-        << ranks;
-#endif
 }
 
 void
@@ -87,35 +59,6 @@ TestSearch::searchOrdered()
     QCOMPARE(result_set_learn, Search::searchOrdered(index, ranks, "learn"));
     QFETCH(LinksList, result_set_good);
     QCOMPARE(result_set_good, Search::searchOrdered(index, ranks, "good"));
- 
-#if 0
-    qWarning() << "searching hummus" << Search::searchOrdered(index, ranks,
-                                                              "hummus");
-    qWarning() << "searching learn" << Search::searchOrdered(index, ranks,
-                                                             "learn");
-    qWarning() << "searching Kick" << Search::searchOrdered(index, ranks,
-                                                             "Kick");
-    qWarning() << "searching kicking" << Search::searchOrdered(index, ranks,
-                                                             "kicking");
-    qWarning() << "searching html" << Search::searchOrdered(index, ranks,
-                                                             "html");
-    qWarning() << "ranks" << ranks;
-    qWarning() << "index" << index.size();
-    qWarning() << "graph" << graph.size();
-#endif
-
-#if 0
-    Graph::const_iterator page;
-    for (page = graph.begin(); page != graph.end(); ++page) {
-        foreach (const QUrl &node, *page)
-            qWarning() << "page" << page.key() << "node" << node.toString();
-    }
-
-    QFETCH(Ranks, ranks_template);
-    Ranks::iterator it;
-    for (it = ranks.begin(); it != ranks.end(); ++it)
-        qWarning() << "key" << it.key() << "value" << it.value();
-#endif
 }
 
 QTEST_MAIN(TestSearch)
