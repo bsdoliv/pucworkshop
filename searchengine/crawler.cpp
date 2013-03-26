@@ -1,4 +1,5 @@
 #include "crawler.h"
+#include "crawlercache.h"
 #include "graph.h"
 #include "index.h"
 
@@ -15,6 +16,7 @@ struct CrawlerPrivate
 {
     Graph *graph;
     Index *index;
+    CrawlerCache *cache;
     QString last_error;
     QUrl current_url;
 
@@ -83,6 +85,12 @@ CrawlerPrivate::addPageToIndex(const QUrl &u, const QByteArray &content)
 bool
 CrawlerPrivate::getPage(const QUrl &url, QByteArray *response)
 {
+    response->clear();
+    if (cache && cache->contains(url)) {
+        response->append(*cache->object(url));
+        return true;
+    }
+
     QNetworkAccessManager *manager = 0;
     QNetworkReply *reply = 0;
 
@@ -92,17 +100,22 @@ CrawlerPrivate::getPage(const QUrl &url, QByteArray *response)
     QObject::connect(reply, SIGNAL(readyRead()), &loop, SLOT(quit()));
     loop.exec();
 
-    response->clear();
-    response->append(reply->readAll());
+    if (reply->size() > 0) {
+        response->append(reply->readAll());
+        if (cache)
+            cache->insert(url, new QByteArray(*response));
+        return true;
+    }
+
     reply->deleteLater();
     manager->deleteLater();
-
-    return response;
+    return false;
 }
 
 Crawler::Crawler() :
     d(new CrawlerPrivate)
 {
+    d->cache = 0;
 }
 
 Crawler::~Crawler()
@@ -121,6 +134,12 @@ void
 Crawler::setIndexContainer(Index *idx)
 {
     d->index = idx;
+}
+
+void
+Crawler::setCrawlerCache(CrawlerCache *cache)
+{
+    d->cache = cache;
 }
 
 bool

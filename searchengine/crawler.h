@@ -3,9 +3,12 @@
 
 class Graph;
 class Index;
+class CrawlerCache;
+
 class QUrl;
-class CrawlerPrivate;
 class QString;
+
+class CrawlerPrivate;
 class Crawler
 {
 public:
@@ -13,6 +16,7 @@ public:
     virtual ~Crawler();
 
     void setGraphContainer(Graph *);
+    void setCrawlerCache(CrawlerCache *);
     void setIndexContainer(Index *);
     bool crawlWeb(const QUrl &url);
     const QString & lastError();
