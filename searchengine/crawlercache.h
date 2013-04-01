@@ -18,6 +18,13 @@ public:
 
         QCache::clear();
     }
+    // TODO dump
+#if 0
+        foreach (const QUrl &u, cache.keys()) {
+            QByteArray *ba = cache.object(u);
+            qWarning() << u.toString() << qPrintable(ba->data());
+        }
+#endif
 };
 
 #endif //! CRAWLERCACHE_H
