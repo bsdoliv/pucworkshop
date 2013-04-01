@@ -3,9 +3,9 @@
 void
 Graph::computeRanks(Ranks *ranks)
 {
-    qreal d = 0.8;
-    int numloops = 10;
-    int npages = this->size();
+    const qreal d = 0.8;
+    const int numloops = 10;
+    const int npages = this->size();
 
     iterator it;
     for (it = this->begin(); it != this->end(); ++it)
@@ -13,8 +13,8 @@ Graph::computeRanks(Ranks *ranks)
 
     for (int i = 0; i < numloops; i++) {
         Ranks newranks;
-        iterator page;
-        for (page = this->begin(); page != this->end(); ++page) {
+        //iterator page;
+        for (const_iterator page = this->begin(); page != this->end(); ++page) {
             qreal newrank = qreal((1 - d) / npages);
             foreach (const QUrl &node, page.value()) {
                 if (this->value(node).contains(page.key())) {
