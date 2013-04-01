@@ -44,20 +44,14 @@ public:
                  << "babaganoush")
             qWarning() << "searching" << w << Search::searchOrdered(index, ranks, w); 
 
-#if 1
-        foreach (const QUrl &u, cache.keys()) {
-            QByteArray *ba = cache.object(u);
-            qWarning() << u.toString() << qPrintable(ba->data());
-        }
-#endif
+        Graph::dump(graph);
 
         cache.clear();
         QTimer::singleShot(1000, qApp, SLOT(quit()));
-        qWarning() << "finished";
+        qWarning() << "ranks" << ranks;
 #if 0
-    qWarning() << ranks;
-    qWarning() << graph;
-    qWarning() << index;
+        qWarning() << graph;
+        qWarning() << index;
 #endif
     }
 };
@@ -68,8 +62,10 @@ main(int argc, char **argv)
     QCoreApplication app(argc, argv);
 
     qApp->setApplicationName(qApp->argv()[0]);
+#if 0
     qWarning() << "arguments count" << qApp->argc();
     qWarning() << "arguments vector" << qApp->argv();
+#endif
     qWarning() << "application name" << qApp->applicationName();
 
     searchengine s;

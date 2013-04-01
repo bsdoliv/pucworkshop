@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QMap>
 #include <QUrl>
+#include <QDebug>
 
 class Ranks : public QMap<QUrl, qreal> { };
 
@@ -28,6 +29,14 @@ class Graph : public QMap<QUrl, LinksList>
 { 
 public:
     void computeRanks(Ranks *ranks);
+    static void dump(const Graph &g)
+    {
+        for (Graph::const_iterator it = g.begin();
+             it != g.end();
+             ++it)
+            foreach (const QUrl &u, it.value())
+                qWarning() << Q_FUNC_INFO << "key" << it.key() << "value" << u.toString();
+    }
 };
 
 #endif // !GRAPH_H
