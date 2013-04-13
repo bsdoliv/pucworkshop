@@ -1,0 +1,11 @@
+* Revision......................... 13h30   14h00
+* Como funciona um Search Engine... 14h00   14h20
+* Intervalo
+* Manipulação de Strings........... 14h30   15h10
+* TDD e QtTest..................... 15h10   15h50
+* Intervalo
+* Containers....................... 16h00   16h50
+* Intervalo
+* Projeto: construção Graph e Index 17h00   17h50
+ 
+# vim: sw=4 ts=4 et:
