@@ -1,40 +1,40 @@
 Agenda
-* Manipulação de Strings........... 13h30 13h50
-* Containers....................... 13h50 14h10
-* Exercício........................ 14h10 14h30
+* Manipulação de Strings .......... 13h30 13h50 (20m)
+* Containers ...................... 13h50 14h10 (20m)
+* Lab-0: Containers ............... 14h10 14h30 (20m)
+* TDD e QtTest .................... 14h30 14h50 (20m)
+* Lab-1: Graph e Index ............ 14h50 15h40 (10m)
 * Intervalo
-* TDD e QtTest..................... 14h40 15h00
-* Projeto: Graph e Index .......... 15h00 15h50
-* Intervalo
-* I/O de Rede (QtNetwork).......... 16h00 16h20
-* Projeto: Crawler................. 16h20 17h00
-* Projeto: PageRank................ 17h00 17h30
+* I/O de Rede (QtNetwork) ......... 16h00 16h20 (20m)
+* Lab-2: QtNetwork ................ 16h20 16h40 (10m)
+* Lab-3: Crawler .................. 16h40 17h20 (40m)
+* Lab-4: PageRank ................. 17h20 17h30 (10m)
 
 Backlog
     * Containers
         + slides
-
-    * Exercício
+***
+done    * Lab-0: Containers ............... 14h10 14h30 (20m)
+done        + prog template
+done        + solucao
+wip    * TDD e QtTest .................... 14h30 14h50 (20m)
+        + slides
+done        + prog template
+*** 9h30
+    * Lab-1: Graph e Index ............ 14h50 15h40 (10m)
         + slides
         + prog template
         + solucao
-    * TDD e QtTest
+    * I/O de Rede (QtNetwork) ......... 16h00 16h20 (20m)
         + slides
         + prog template
-
-    * Projeto: Graph e Index 
-        + slides
-        + prog template
-        + solucao
-    * I/O de Rede (QtNetwork)
-        + slides
-        + prog template
-
-    * Projeto: Crawler
+    * Lab-2: QtNetwork ................ 16h20 16h40 (10m)
+*** 10h30
+    * Lab-3: Crawler .................. 16h40 17h20 (40m)
         + slides
         + prog template
         + solucao
-    * Projeto: PageRank
+    * Lab-4: PageRank ................. 17h20 17h30 (10m)
         + slides
         + prog template
         + solucao
