@@ -1,0 +1,42 @@
+Agenda
+* Manipulação de Strings........... 13h30 13h50
+* Containers....................... 13h50 14h10
+* Exercício........................ 14h10 14h30
+* Intervalo
+* TDD e QtTest..................... 14h40 15h00
+* Projeto: Graph e Index .......... 15h00 15h50
+* Intervalo
+* I/O de Rede (QtNetwork).......... 16h00 16h20
+* Projeto: Crawler................. 16h20 17h00
+* Projeto: PageRank................ 17h00 17h30
+
+Backlog
+    * Containers
+        + slides
+
+    * Exercício
+        + slides
+        + prog template
+        + solucao
+    * TDD e QtTest
+        + slides
+        + prog template
+
+    * Projeto: Graph e Index 
+        + slides
+        + prog template
+        + solucao
+    * I/O de Rede (QtNetwork)
+        + slides
+        + prog template
+
+    * Projeto: Crawler
+        + slides
+        + prog template
+        + solucao
+    * Projeto: PageRank
+        + slides
+        + prog template
+        + solucao
+
+# vim: sw=4 ts=4 et:
