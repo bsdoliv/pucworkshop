@@ -15,6 +15,7 @@ uint qHash(const QPoint &p)
 
 int main()
 {
+#if 0
     QMap<QPoint, int> map;
     map.insert(QPoint(1, 2), 42);
     int value = map.value(QPoint(1, 2));
@@ -25,11 +26,13 @@ int main()
 
     QSet<QPoint> set;
     set.insert(QPoint(1, 1));
+#endif
 
     // Check the location
     QStringList strings;
     strings << "abc" << "def" << "hij";
 
+#if 0
     QMutableListIterator<QString> it(strings);
     it.toBack();
     qDebug() << "Just iterated over: " << it.previous();
@@ -45,10 +48,19 @@ int main()
 
     while (it.hasNext())
         qDebug() << it.next();
+#endif
 
+    qWarning() << "foreach";
     // implementar foreach
+    foreach (QString s, strings)
+        qWarning() 
+            << "value" << s;
 
+    qWarning() << "stl";
     // implemenetar stl iterator
-
+    QStringList::iterator it = strings.begin();
+    for (; it != strings.end(); ++it)
+        qWarning() 
+            << "value" << *it;
     return 0;
 }
