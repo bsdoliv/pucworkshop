@@ -24,4 +24,29 @@ Backlog
         + prog template
         + solucao
 
+===        
+
+Roteiro
+
+* QtNetwork slides
+* Lab-1
+    * exercício pra pegar pagina na web com networkmanager, entao implementa getPage()
+
+* Crawler slides
+    * explicar filosofia do crawler, listar e explicar métodos e sequencia de
+        funcionamento:
+        * crawlerWeb() (explicar algoritmo e esquema de fila)
+            * getPage()
+            * addPageToIndex()
+
+    * métodos que já vão prontos:
+        * getAllLinks() 
+        * addLinksToGraph()
+        * addPageToIndex()
+
+* Lab-1
+    * exercício pra parsear html e pegar url, entao implementa getNextUrl()
+
+
+
 # vim: sw=4 ts=4 et:
