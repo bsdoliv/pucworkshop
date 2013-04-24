@@ -1,0 +1,27 @@
+Agenda
+* I/O de Rede (QtNetwork) ......... 13h30 14h00 (20m)
+* Lab-1: QtNetwork ................ 14h00  
+* Lab-2: Crawler .................. ...
+* Slides: PageRank ................ ...
+* Lab-3: PageRank ................. ...   15h40 (90m)
+* QtGui: QMainWindow,
+    QLineEdit, QLabel,
+    QLayout,
+    Signals/Slots ................. 16h00
+* Lab QtGui ....................... ...   17h00 (90m)
+
+Backlog
+    * I/O de Rede (QtNetwork) ......... 16h00 16h20 (20m)
+        + slides
+        + prog template
+    * Lab-1: QtNetwork ................ 16h20 16h40 (10m)
+    * Lab-2: Crawler .................. 16h40 17h20 (40m)
+        + slides
+        + prog template
+        + solucao
+    * Lab-3: PageRank ................. 17h20 17h30 (10m)
+        + slides
+        + prog template
+        + solucao
+
+# vim: sw=4 ts=4 et:
