@@ -31,6 +31,7 @@ Roteiro
 * QtNetwork slides
 * Lab-1
     * exercício pra pegar pagina na web com networkmanager, entao implementa getPage()
+    * subir um webserver
 
 * Crawler slides
     * explicar filosofia do crawler, listar e explicar métodos e sequencia de
@@ -50,7 +51,6 @@ Roteiro
                 fila.enqueue(llinks)
                 ja_baixou.append(url)
             }
-
     * explica algoritmo getAllLinks()
 
 * Lab-1
