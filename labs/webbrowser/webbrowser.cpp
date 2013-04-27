@@ -79,8 +79,7 @@ void WebBrowser::showPage() {
     reply->deleteLater();
 }
 
-int WebBrowser::getNextUrl(const QByteArray &content, QUrl *u)
-{
+int WebBrowser::getNextUrl(const QByteArray &content, QUrl *u) {
     int start_link;
     u->clear();
     if ((start_link = content.indexOf("<a href=")) < 0)
