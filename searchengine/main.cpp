@@ -30,6 +30,7 @@ public:
         Index index;
         crawl.setIndexContainer(&index);
 
+        qWarning() << "indexing" << "http://www.udacity.com/cs101x/index.html";
         if (! crawl.crawlWeb(url))
             qFatal("%s", qPrintable(crawl.lastError()));
 
@@ -60,12 +61,7 @@ int
 main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
-
     qApp->setApplicationName(qApp->argv()[0]);
-#if 0
-    qWarning() << "arguments count" << qApp->argc();
-    qWarning() << "arguments vector" << qApp->argv();
-#endif
     qWarning() << "application name" << qApp->applicationName();
 
     searchengine s;
