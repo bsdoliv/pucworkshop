@@ -68,8 +68,26 @@ void WebBrowser::updateAddressBar(const QUrl &url) {
 void WebBrowser::showPage() {
     if (reply->size() > 0) {
         qWarning() << "reply->size()" << reply->size();
-        browser->setHtml(reply->readAll(),
-                         QUrl::fromUserInput(addressBar->text()));
+        QByteArray content(reply->readAll());
+        QUrl u = QUrl::fromUserInput(addressBar->text());
+        browser->setHtml(content, u);
+
+        u.clear();
+        getNextUrl(content, &u);
+        qWarning() << "nexturl" << u;
     }
     reply->deleteLater();
+}
+
+int WebBrowser::getNextUrl(const QByteArray &content, QUrl *u)
+{
+    int start_link;
+    u->clear();
+    if ((start_link = content.indexOf("<a href=")) < 0)
+        return -1;
+
+    int start_quote = content.indexOf('"', start_link);
+    int end_quote = content.indexOf('"', ++start_quote);
+    u->setUrl(content.mid(start_quote, end_quote - start_quote));
+    return end_quote;
 }

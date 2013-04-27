@@ -36,13 +36,22 @@ Roteiro
     * explicar filosofia do crawler, listar e explicar métodos e sequencia de
         funcionamento:
         * crawlerWeb() (explicar algoritmo e esquema de fila)
-            * getPage()
-            * addPageToIndex()
 
-    * métodos que já vão prontos:
-        * getAllLinks() 
-        * addLinksToGraph()
-        * addPageToIndex()
+            fila.enqueue(seed)
+            while (fila) {
+                url = fila.dequeue()
+                if (ja_baixou(url))
+                    continue;
+                
+                getPage(url, &conteudo)         // implementar
+                addPageToIndex(url, conteudo)
+                getAllLinks(conteudo, &llinks)  // implementar
+                addLinksToGraph(url, llinks)
+                fila.enqueue(llinks)
+                ja_baixou.append(url)
+            }
+
+    * explica algoritmo getAllLinks()
 
 * Lab-1
     * exercício pra parsear html e pegar url, entao implementa getNextUrl()

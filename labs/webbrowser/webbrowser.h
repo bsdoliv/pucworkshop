@@ -22,8 +22,10 @@ signals:
 public slots:
     void loadPage();
     void updateAddressBar(const QUrl &url);
+
 private slots:
     void showPage();
+    int getNextUrl(const QByteArray &content, QUrl *u);
     
 private:
     QLineEdit *addressBar;
