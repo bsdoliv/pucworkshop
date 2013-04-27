@@ -26,6 +26,8 @@ CalculatorWidget::CalculatorWidget(QWidget *parent) :
 
 void CalculatorWidget::valueChanged()
 {
+    int result  = m_firstValue->text().toInt() + m_secondValue->text().toInt();
+    m_result->setText(QString::number(result));
     // Enter your code here
     //
     // The input data is available from the QLineEdit pointers m_firstValue and m_secondValue
