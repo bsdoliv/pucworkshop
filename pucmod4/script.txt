@@ -56,6 +56,4 @@ Roteiro
 * Lab-1
     * exercício pra parsear html e pegar url, entao implementa getNextUrl()
 
-
-
 # vim: sw=4 ts=4 et:
