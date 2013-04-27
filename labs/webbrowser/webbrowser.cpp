@@ -68,9 +68,7 @@ void WebBrowser::updateAddressBar(const QUrl &url) {
 void WebBrowser::showPage() {
     if (reply->size() > 0) {
         qWarning() << "reply->size()" << reply->size();
-        QByteArray response;
-        response.append(reply->readAll());
-        browser->setHtml(response,
+        browser->setHtml(reply->readAll(),
                          QUrl::fromUserInput(addressBar->text()));
     }
     reply->deleteLater();
