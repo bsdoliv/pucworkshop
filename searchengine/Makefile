@@ -1,75 +1,63 @@
 # qt config
-export QTDIR?=/usr
+QTDIR?=/usr
 QMAKE=${QTDIR}/bin/qmake
+GMAKE=/usr/bin/make
 
-PROG=searchengine
+TARGET=searchengine
 VERSION=0.1
 
-QMAKEFILE=${PROG}.makefile
-QMAKEPRO=${PROG}.pro
+QMAKEFILE=${TARGET}.makefile
+QMAKEPRO=${TARGET}.pro
 
 # dev build opts
-QMAKEFILE_OPTS+="TARGET=${PROG}"
-QMAKEFILE_OPTS+="OBJECTS_DIR=./.objs"
-QMAKEFILE_OPTS+="MOC_DIR=./.mocs"
-QMAKEFILE_OPTS+="CONFIG += debug"
-QMAKEFILE_OPTS+="INCLUDEPATH += ${INCLUDEPATH}"
-QMAKEFILE_OPTS+="QT += network"
-QMAKEFILE_OPTS+="QT -= sql"
-QMAKEFILE_OPTS+="QT += gui"
-QMAKEFILE_OPTS+="QT += webkit"
-
+QMAKEPRO_OPTS+= "TARGET=${TARGET}"
+QMAKEPRO_OPTS+= "OBJECTS_DIR=${.CURDIR}/.objs"
+QMAKEPRO_OPTS+= "MOC_DIR=${.CURDIR}/.mocs"
+QMAKEPRO_OPTS+= "CONFIG += debug"
+QMAKEPRO_OPTS+= "INCLUDEPATH += ${INCLUDEPATH}"
+QMAKEPRO_OPTS+= "QT += network"
+QMAKEPRO_OPTS+= "QT -= sql"
+#QMAKEPRO_OPTS+= "QT -= gui"
+QMAKEPRO_OPTS+= "QT += gui"
+QMAKEPRO_OPTS+= "QT += webkit"
+QMAKEPRO_OPTS+= "QT += core"
 QMAKEPRO_OPTS+= -t app
 QMAKEPRO_OPTS+= -nopwd
 QMAKEPRO_OPTS+= -norecursive
-QMAKEPRO_OPTS+= ${SRCS} ${HDRS}
 
 SRCS=*.cpp
 HDRS=*.h
 
-all: build
+.MAIN: build
+build: .PHONY ${TARGET}
 
-.PHONY: build
-build: ${PROG}
-
-.PHONY: ${PROG}
-${PROG}: ${QMAKEFILE}
-	${MAKE} -f $<
+${TARGET}: ${QMAKEFILE}
+	${GMAKE} -f ${.ALLSRC}
 
 ${QMAKEFILE}: ${QMAKEPRO}
-	${QMAKE} -makefile ${QMAKEFILE_OPTS} -o $@ $<
+	${QMAKE} -makefile ${QMAKEFILE_OPTS} -o ${.TARGET} ${.ALLSRC}
 
 ${QMAKEPRO}: Makefile
-	${QMAKE} -project ${QMAKEPRO_OPTS} -o $@ $<
+	${QMAKE} -project ${QMAKEPRO_OPTS} ${SRCS} ${HDRS} -o ${.TARGET} 
 
-.PHONY: tests
-tests:
-	${MAKE} -C tests build
-	${MAKE} -C tests run
+distclean: .PHONY
+.	for _d in ${.CURDIR}/.objs ${.CURDIR}/.mocs
+.		if exists(${_d})
+			rmdir ${_d}
+.		endif
+.	endfor
 
-.PHONY: testsclean
-testsclean:
-	${MAKE} -C tests distclean
+tests: .PHONY
+	cd tests && ${MAKE} build
+	cd tests && ${MAKE} run
 
-.PHONY: distclean 
-distclean: testsclean clean prunebuild
-	-[ -d .objs ] && \
-		rmdir .objs
-	-[ -d .mocs ] && \
-		rmdir .mocs
+TARGETS= build
+SUBDIR= tests
 
-.PHONY: clean
-clean:
-	-[ -e ${QMAKEFILE} ] && \
-		${MAKE} -f ${QMAKEFILE} clean
-	-[ -d ${PROG}.app ] && \
-		rm -rfv ${PROG}.app
-	-rm -fv ${PROG}
-	-rm -fv ui_*.h
+CLEANFILES+= ui_*.h ${TARGET} ${QMAKEFILE} ${QMAKEPRO} 
+CLEANFILES+= ${.CURDIR}/.objs/* ${.CURDIR}/.mocs/*
 
-.PHONY: prunebuild
-prunebuild:
-	-rm -fv ${QMAKEFILE}
-	-rm -fv ${QMAKEPRO}
+.include <bsd.subdir.mk>
+.include <bsd.prog.mk>
 
 # vim: set tw=78:

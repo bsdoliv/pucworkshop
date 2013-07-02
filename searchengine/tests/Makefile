@@ -1,78 +1,56 @@
-#
-#	$Id$
-
 # qt config
-export QTDIR?=/usr
+QTDIR?=/usr
 QMAKE=${QTDIR}/bin/qmake
+GMAKE=/usr/bin/make
 
-TESTS_SOURCES=$(shell ls test*.cpp)
-TESTS_TARGETS=$(TESTS_SOURCES:.cpp=)
+TESTCASES=
+TESTCASES+=test_computeranks
+TESTCASES+=test_crawler
+TESTCASES+=test_search
 
-QMAKEFILES=$(TESTS_SOURCES:.cpp=.makefile)
-QMAKEPROS=$(TESTS_SOURCES:.cpp=.pro)
+QMAKEFILE_OPTS= 
+QMAKEPRO_OPTS+=	"-nopwd"
+QMAKEPRO_OPTS+=	"-norecursive"
+QMAKEPRO_OPTS+=	"CONFIG += qtestlib" 
+QMAKEPRO_OPTS+=	"OBJECTS_DIR = ${.CURDIR}/../.objs"
+QMAKEPRO_OPTS+=	"MOC_DIR = ${.CURDIR}/../.mocs"
+QMAKEPRO_OPTS+=	"QT -= sql"
+QMAKEPRO_OPTS+=	"QT -= gui"
+QMAKEPRO_OPTS+=	"QT += network"
 
-all: build 
-#run
+.MAIN: build
+build: ${TESTCASES} .PHONY
 
-.PHONY: build
-build: ${TESTS_TARGETS}
+.for _test_ in ${TESTCASES} # {
+${_test_}: ${_test_}.makefile
+	${GMAKE} -f ${.ALLSRC}
 
-.PHONY: ${TESTS_TARGETS}
-${TESTS_TARGETS}: ${QMAKEFILES} ${TESTS_SOURCES}
-	${MAKE} -f $@.makefile
+${_test_}.makefile: ${_test_}.pro
+	${QMAKE} -makefile ${QMAKEFILE_OPTS} ${.ALLSRC} -o ${.TARGET}
 
-.PHONY: run
-run: build
-	./run-tests.sh
+${_test_}.pro: ${MAKEFILE}
+	${QMAKE} -project ${QMAKEPRO_OPTS} ${_test_}.cpp -o ${.TARGET}
 
-#		"TARGET=${TEST}" 
-${QMAKEFILES}: ${QMAKEPROS}
-	${QMAKE} -makefile \
-		$(@:.makefile=.pro) \
-		"OBJECTS_DIR=../.objs" \
-		"MOC_DIR=../.mocs" \
-		"QT -= sql" \
-		"QT += network" \
-		"QT -= gui" \
-		-o $@
+CLEANFILES+=${_test_}
+.endfor # }
 
-#		"CONFIG += debug" 
-${QMAKEPROS}: Makefile
-	${QMAKE} -project \
-		"CONFIG += qtestlib" \
-		-nopwd \
-		-norecursive \
-		$(@:.pro=.cpp) \
-		-o $@
+run: .PHONY build
+.for _test in ${TESTCASES} # {
+	@[ -x ${_test} -a x${_test} ] && eval ./${_test}
+.endfor
 
-.PHONY: distclean
-distclean: clean prunebuild
-	-[ -d .objs ] && \
-		rmdir .objs
-	-[ -d .mocs ] && \
-		rmdir .mocs
+clean distclean: .PHONY
+.for _mk in ${TESTCASES} # {
+.	if exists(${_mk}.makefile) 
+		${GMAKE} -f ${_mk}.makefile ${.TARGET}
+.	endif
+.	if exists(${_mk}.pro)
+.		ifmake (distclean)
+			rm -v ${_mk}.pro
+.		endif
+.	endif
+.endfor	# {
 
-.PHONY: clean
-clean:
-	-for i in ${QMAKEFILES}; do \
-		[ -e $${i} ] && \
-		${MAKE} -f $${i} clean; \
-	done
-	-rm -fv ${TESTS_TARGETS}
-	-for i in ${TESTS_TARGETS}; do \
-		[ -d $${i}.app ] && \
-			rm -rfv $${i}.app ;\
-	done
-
-.PHONY: prunebuild
-prunebuild:
-	-for i in ${QMAKEFILES}; do \
-		[ -e $${i} ] && \
-		rm -fv $${i};\
-	done
-	-for i in ${QMAKEPROS}; do \
-		[ -e $${i} ] && \
-		rm -fv $${i};\
-	done
+.include <bsd.prog.mk>
 
 # vim: set tw=78:
