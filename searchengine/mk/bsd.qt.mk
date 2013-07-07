@@ -1,5 +1,7 @@
-.ifndef BSD_QT_MK
+.ifndef BSD_QT_MK # {
 BSD_QT_MK=1
+
+# TODO: provide per target build
 
 QTDIR?=/usr
 QMAKE?=${QTDIR}/bin/qmake
@@ -16,6 +18,7 @@ QMAKEOPTS.debug?=	no
 QMAKEOPTS.incpath?=
 QMAKEOPTS.nopwd?=	yes
 QMAKEOPTS.recursive?=	no
+QMAKEOPTS.config?=	
 
 # default qt options
 QMAKEOPTS.qt?= 		core network
@@ -26,6 +29,9 @@ QMAKEOPTS.noqt?=	sql gui webkit xml
 QMAKEOPTS= 	"TARGET = ${QMAKEOPTS.target}"
 QMAKEOPTS+=	"OBJECTS_DIR = ${QMAKEOPTS.objs}"
 QMAKEOPTS+=	"MOC_DIR = ${QMAKEOPTS.mocs}"
+.if !empty(QMAKEOPTS.config)
+QMAKEOPTS+=	"CONFIG += ${QMAKEOPTS.config}"
+.endif
 .if (${QMAKEOPTS.debug} == "yes")
 QMAKEOPTS+=	"CONFIG += debug"
 .endif
@@ -79,15 +85,19 @@ distclean: .PHONY clean
 .		endif
 .	endfor
 
-.MAIN: build
-build: .PHONY ${QTARGET}
+.MAIN: buildqt
+buildqt: .PHONY ${QTARGET}
 
 CLEANFILES+= ui_*.h ${QTARGET} ${QT.makefile} ${QT.profile} 
 CLEANFILES+= ${.CURDIR}/.objs/*.o ${.CURDIR}/.mocs/*.moc ${.CURDIR}/.mocs/*.cpp
 
-TARGETS= build
+TARGETS= buildqt
+# ugly hack to check if prog has been included since first thing prog does is
+# include own.mk
+.if !defined(_BSD_OWN_MK_)
 .include <bsd.prog.mk>
+.endif
 
-.endif # BSD_QT_MK
+.endif # BSD_QT_MK }
 
 # vim: set ts=8 sw=8 noet:
