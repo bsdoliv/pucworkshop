@@ -1,63 +1,24 @@
-# qt config
-QTDIR?=/usr
-QMAKE=${QTDIR}/bin/qmake
-GMAKE=/usr/bin/make
+.include "Makefile.inc"
 
-TARGET=searchengine
+QTARGET=searchengine
 VERSION=0.1
 
-QMAKEFILE=${TARGET}.makefile
-QMAKEPRO=${TARGET}.pro
+QSRCS= crawler.cpp graph.cpp main.cpp search.cpp webbrowser.cpp
+QHDRS= crawler.h crawlercache.h graph.h index.h search.h webbrowser.h
 
-# dev build opts
-QMAKEPRO_OPTS+= "TARGET=${TARGET}"
-QMAKEPRO_OPTS+= "OBJECTS_DIR=${.CURDIR}/.objs"
-QMAKEPRO_OPTS+= "MOC_DIR=${.CURDIR}/.mocs"
-QMAKEPRO_OPTS+= "CONFIG += debug"
-QMAKEPRO_OPTS+= "INCLUDEPATH += ${INCLUDEPATH}"
-QMAKEPRO_OPTS+= "QT += network"
-QMAKEPRO_OPTS+= "QT -= sql"
-#QMAKEPRO_OPTS+= "QT -= gui"
-QMAKEPRO_OPTS+= "QT += gui"
-QMAKEPRO_OPTS+= "QT += webkit"
-QMAKEPRO_OPTS+= "QT += core"
-QMAKEPRO_OPTS+= -t app
-QMAKEPRO_OPTS+= -nopwd
-QMAKEPRO_OPTS+= -norecursive
+QMAKEOPTS.debug=	yes
 
-SRCS=*.cpp
-HDRS=*.h
-
-.MAIN: build
-build: .PHONY ${TARGET}
-
-${TARGET}: ${QMAKEFILE}
-	${GMAKE} -f ${.ALLSRC}
-
-${QMAKEFILE}: ${QMAKEPRO}
-	${QMAKE} -makefile ${QMAKEFILE_OPTS} -o ${.TARGET} ${.ALLSRC}
-
-${QMAKEPRO}: Makefile
-	${QMAKE} -project ${QMAKEPRO_OPTS} ${SRCS} ${HDRS} -o ${.TARGET} 
-
-distclean: .PHONY
-.	for _d in ${.CURDIR}/.objs ${.CURDIR}/.mocs
-.		if exists(${_d})
-			rmdir ${_d}
-.		endif
-.	endfor
+QMAKEOPTS.qt+=	webkit
+QMAKEOPTS.qt+=	gui
+QMAKEOPTS.qt+=	network
 
 tests: .PHONY
 	cd tests && ${MAKE} build
 	cd tests && ${MAKE} run
 
-TARGETS= build
+.include "bsd.qt.mk"
+
 SUBDIR= tests
-
-CLEANFILES+= ui_*.h ${TARGET} ${QMAKEFILE} ${QMAKEPRO} 
-CLEANFILES+= ${.CURDIR}/.objs/* ${.CURDIR}/.mocs/*
-
 .include <bsd.subdir.mk>
-.include <bsd.prog.mk>
 
 # vim: set tw=78:
