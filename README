@@ -1,0 +1,10 @@
+building a search engine with c++ and qt - implementing google pagerank(c)
+
+this contains support material used in a 16 hours workshop lectured at the
+computer sciences department of the Pontificia Universidade Catolica de Sao
+Paulo, during 4 weekends in 2013's fall.
+
+resources:
+
+a c++ introduction course by google, using search engine concepts
+https://developers.google.com/edu/c++/cpp-in-depth
