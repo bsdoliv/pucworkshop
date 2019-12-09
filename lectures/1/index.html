@@ -1,0 +1,929 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/chocolate_logo_128.png"></span>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+    </hgroup>
+    <article class="smaller flexbox vright">
+    </br> </br> </br> </br>
+    </br> </br> </br> </br>
+    </br> </br> </br> </br>
+    </br> </br> </br>
+    <p style="font-size: 50%;">Copyright &copy; 2013 Chocolate Software Labs.</br>
+    Todos os direitos reservados.</br></br>
+    Nenhuma parte deste website ou de quaisquer de seus conteúdos podem ser
+    reproduzidos, copiados, compartilhados em redes sociais, modificados ou
+    adaptados, sem consentimento expresso prévio de Chocolate Software Labs ou
+    seus representantes legais.
+    </p>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>História e Visão geral dos módulos Qt</strike></li>
+        <li><b>Introdução ao Git & Preparação do ambiente</b></li>
+        <li>Introdução ao qmake & Construção em Qt</strike></li>
+        <li>Projeto: construção do Hello World</li>
+        <li>Como funciona um Search Engine</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Introdução ao Git</h2>
+      <h3>+ Preparação do ambiente</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Encontrem o arquivo UbuntuMatrix.vdi em</li>
+            <pre class="prettyprint" data-lang="Shell">/home/VirtualMachines/workshop</pre>
+        <li>Primeiro boot no VirtualBox</li>
+        <li>Verificando comandos (Terminal)</li>
+        <pre data-lang="Shell">vim --version</pre>
+        <pre data-lang="Shell">git --version</pre>
+        <pre data-lang="Shell">ecpg --version</pre>
+        <pre data-lang="Shell">qtcreator --version</pre>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+    <p>Comandos Git</p>
+      <ul>
+        <li>Clone</li>
+        <li>Edit/Add</li>
+        <li>Commit</li>
+        <li>Pull</li>
+        <li>Push</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+    <p>Comandos Git</p>
+      <ul>
+        <li><b>Clone</b> (substitua o nome do seu usuario)</li>
+        <pre class="prettyprint" data-lang="Shell">
+git clone https://nome_do_usuario@bitbucket.org/qtlabmeetup/qtlabworkshop.git</pre>
+        <li>Edit/Add</li>
+        <li>Commit</li>
+        <li>Pull</li>
+        <li>Push</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+    <p>Comandos Git</p>
+      <ul>
+        <li>Clone</li>
+        <li><b>Edit/Add</b></li>
+        <pre class="prettyprint" data-lang="Shell">
+cd qtlabworkshop && git status
+mkdir students/seu_nome && git status
+touch students/seu_nome/.gitkeep && git status
+git add students && git status</pre>
+        <li>Commit</li>
+        <li>Pull</li>
+        <li>Push</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article class="smaller">
+    <p>Comandos Git</p>
+      <ul>
+        <li>Clone</li>
+        <li>Edit/Add</li>
+        <li><b>Commit</b></li>
+        <pre class="prettyprint" data-lang="Shell">
+git commit -am'importando students/seu_nome'
+git status
+# not pushed yet
+
+# conserte apenas 1 vez seu nome/email nos próximos commits
+git config --global user.name "seu_nome"
+git config --global user.email seuemail@seuprovedor.com
+git commit --amend --reset-author</pre>
+        <li>Pull</li>
+        <li>Push</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+    <p>Comandos Git</p>
+      <ul>
+        <li>Clone</li>
+        <li>Edit/Add</li>
+        <li>Commit</li>
+        <li><b>Pull</b></li>
+        <pre class="prettyprint" data-lang="Shell">
+git pull origin master</pre>
+        <li>Push</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+    <p>Comandos Git</p>
+      <ul>
+        <li>Clone</li>
+        <li>Edit/Add</li>
+        <li>Commit</li>
+        <li>Pull</li>
+        <li><b>Push</b></li>
+        <pre class="prettyprint" data-lang="Shell">
+git push origin master</pre>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article class="smaller">
+    <p>Comandos Git - Sumário</p>
+      <ul>
+        <li>Clone
+        <pre class="prettyprint" data-lang="Shell">
+git clone url</pre>
+        </li>
+        <li>Edit/Add
+        <pre class="prettyprint" data-lang="Shell">
+git add new_files</pre>
+        </li>
+        <li>Commit
+        <pre class="prettyprint" data-lang="Shell">
+git commit -am'message'</pre>
+        </li>
+        <li>Pull
+        <pre class="prettyprint" data-lang="Shell">
+git pull origin master</pre>
+        </li>
+        <li>Push
+        <pre class="prettyprint" data-lang="Shell">
+git push origin master</pre>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao Git</h2>
+      <h3>Preparação do ambiente</h3>
+    </hgroup>
+    <article>
+    <p><b>Atividade</b></p>
+    <p> Utilizando o conteúdo abordado neste tópico, efetue a atividade: </p>
+      <ul>
+        <li>Baixe novamente o repositório qtlabmeetup/qtlabworkshop.git</li>
+        <li>Crie seu próprio diretório, conforme orientado nos slides</li>
+        <li>Efetue o commit</li>
+        <li>Sincronize com o servidor (Pull/Push)</li>
+      </ul>
+      <p>Saiba mais:</p>
+      <a href="https://www.udacity.com/wiki/using_git">https://www.udacity.com/wiki/using_git</a>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>História e Visão geral dos módulos Qt</strike></li>
+        <li><strike>Introdução ao Git & Preparação do ambiente</strike></li>
+        <li><b>Introdução ao qmake & Construção em Qt</b></li>
+        <li>Projeto: construção do Hello World</li>
+        <li>Como funciona um Search Engine</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Introdução ao qmake</h2>
+      <h3>+ Construção (Build) em Qt</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao qmake</h2>
+      <h3>Construção (Build) em Qt</h3>
+    </hgroup>
+    <article>
+    <p><b>qmake</b>. O que é?</p>
+      <ul>
+        <li>Cria "Makefiles" (receitas de <b>build</b>) multi-plataforma</li>
+        <li>Suporte à variáveis e instruções condicionais</li>
+        <li>Gera diretivas automáticas para <b>moc</b> (meta-object-compiler)</li>
+      </ul>
+    <p> <b>helloworld.pro</b>. Num arquivo .pro, encontramos:</p>
+    <ul>
+    <li>Listagem de arquivos source e headers</li>
+    <li>Configuração do build do projeto</li>
+    </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao qmake</h2>
+      <h3>Construção (Build) em Qt</h3>
+    </hgroup>
+    <article>
+    <p><b>Atividade</b></p>
+    <p>Acesse o diretório <b>students/seu_nome</b> em seguida: (i) crie um subdiretório
+    <b>helloworld</b>, acesse este subdiretório e (ii) crie um <b>helloworld.pro</b>
+    com o conteúdo a seguir:</p>
+    <pre class="prettyprint" data-lang="config">
+#File: helloworld.pro
+TARGET = helloworld
+SOURCES = main.cpp
+HEADERS +=
+QT = core
+QT -= gui
+    </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao qmake</h2>
+      <h3>Construção (Build) em Qt</h3>
+    </hgroup>
+    <article>
+    <p> Crie um arquivo <b>main.cpp</b>, com o conteúdo abaixo. A seguir efetue commit.</p>
+    <pre class="prettyprint" data-lang="C++">
+//File: main.cpp
+int
+main(void)
+{
+    return 0;
+}
+</pre>
+<p> Compile, execute, verifique as dependências:</p>
+    <pre class="prettyprint" data-lang="Shell">
+% qmake && make
+% ./helloworld
+% ldd ./helloworld
+    </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao qmake</h2>
+      <h3>Construção (Build) em Qt</h3>
+    </hgroup>
+    <article>
+    <p>Acrescente a chamada à função <i>qWarning()</i></p>
+    <pre class="prettyprint" data-lang="C++">
+// File: main.cpp
+int
+main(void)
+{
+    <b>qWarning() &lt;&lt; "hello world";</b>
+    return 0;
+}
+</pre>
+<p> Compile, execute:</p>
+    <pre class="prettyprint" data-lang="Shell">
+% make
+% ./helloworld
+    </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Introdução ao qmake</h2>
+      <h3>Construção (Build) em Qt</h3>
+    </hgroup>
+    <article>
+    <p>Erro de compilação! acrescente o módulo <i>QDebug</i>, commit em seguida</p>
+    <pre class="prettyprint" data-lang="C++">
+//File: main.cpp
+<b>#include &lt;QDebug&gt;</b>
+int
+main(void)
+{
+    qWarning() &lt;&lt; "hello world";
+    return 0;
+}
+</pre>
+<p> Novamente, compile, execute, verifique as dependências:</p>
+    <pre class="prettyprint" data-lang="Shell">
+% make && ./helloworld && ldd ./helloworld
+    </pre>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>História e Visão geral dos módulos Qt</strike></li>
+        <li><strike>Introdução ao Git & Preparação do ambiente</strike></li>
+        <li><strike>Introdução ao qmake & Construção em Qt</strike></li>
+        <li><b>Projeto: construção do Hello World</b></li>
+        <li>Como funciona um Search Engine</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Projeto</h2>
+      <h3>+ Construção do Hello World</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World</h3>
+    </hgroup>
+    <article>
+    <p><b>Atividade</b></p>
+    <p>Aprimorando o projeto <i>Hello World</i></p>
+      <ul>
+        <li>Acesse seu diretório de trabalho (<b>students/seu_nome</b>)</li>
+        <li>Modifique o projeto helloworld (agora será gráfico) conforme
+        orientações dos slides a seguir</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World<h3>
+    </hgroup>
+    <article>
+      <p>Modifique o arquivo main.cpp com o seguinte conteúdo:</p>
+      <pre class="prettyprint" data-lang="C++">
+// File: main.cpp
+#include &lt;QApplication&gt;
+#include &lt;QLabel&gt;
+int 
+main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
+    QLabel l("Hello World!");
+    l.show();
+    return app.exec();
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World<h3>
+    </hgroup>
+    <article>
+    <p>Modifique no arquivo helloworld.pro, a linha contendo "QT -= gui".</br>Preserve o restante do arquivo como está.</p>
+    <pre class="prettyprint" data-lang="config">
+#File: helloworld.pro
+...
+QT += gui
+</pre>
+<p> Compile, execute, verifique as dependências:</p>
+    <pre class="prettyprint" data-lang="Shell">
+% qmake && make
+% ./helloworld
+% ldd ./helloworld
+    </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World<h3>
+    </hgroup>
+    <article>
+    <p>Note que agora há muito mais bibliotecas como dependências.</br>
+    Todo aplicativo gráfico Qt, possui um objeto QApplication (pressione 'h').
+    </p>
+    <pre class="prettyprint" data-lang="C++">
+// File: main.cpp
+#include &lt;QApplication&gt;
+#include &lt;QLabel&gt;
+int 
+main(int argc, char **argv)
+{ 
+    <b>QApplication app(argc, argv);</b>
+    QLabel l("Hello World!");
+    l.show();
+    return app.exec();
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World<h3>
+    </hgroup>
+    <article>
+    <p>Quando instanciamos um objeto gráfico (QWidget), basta invocar seu método show() para que uma janela seja construída.
+    </p>
+      <pre class="prettyprint" data-lang="C++">
+// File: main.cpp
+#include &lt;QApplication&gt;
+#include &lt;QLabel&gt;
+int 
+main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
+    <b>QLabel l("Hello World!");
+    l.show();</b>
+    return app.exec();
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World<h3>
+    </hgroup>
+    <article>
+    <p>Por último invocamos o método exec() da classe QApplication.</br>
+    O método QApplication::exec() instancia o loop de eventos, responsável pela
+    comunicação entre objetos Qt, ações do usuário, e eventos do sistema.</p>
+      <pre class="prettyprint" data-lang="C++">
+// File: main.cpp
+#include &lt;QApplication&gt;
+#include &lt;QLabel&gt;
+int 
+main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
+    QLabel l("Hello World!");
+    l.show();
+    <b>return app.exec();</b>
+}
+</pre>
+    </article>
+  </slide>
+
+  <slide hidden>
+    <hgroup>
+      <h2>Projeto</h2>
+      <h3>Construção do Hello World</h3>
+    </hgroup>
+    <article>
+    <p>Por fim...</p>
+    <ul>
+        <li>Efetue o commit</li>
+        <li>Dúvidas? Converse com os colegas</li>
+        <ul>
+        <li>Envie para o email da lista de estudantes</li>
+        <li>Via Twitter</li>
+        <li>Ou encaminhe diretamente ao orientador</li>
+        </ul>
+    </ul>
+    </article>
+  </slide>
+
+  <slide >
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>História e Visão geral dos módulos Qt</strike></li>
+        <li><strike>Introdução ao Git & Preparação do ambiente</strike></li>
+        <li><strike>Introdução ao qmake & Construção em Qt</strike></li>
+        <li><strike>Projeto: construção do Hello World</strike></li>
+        <li><b>Como funciona um Search Engine</b></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Como funciona um Search Engine</h2>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Há 3 coisas que você precisa fazer muito bem pra ser o melhor search engine do mundo</li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3>Introdução</h3>
+    </hgroup>
+    <article>
+    <p>3 coisas a fazer</p>
+    <ul class="build">
+        <li>Crawl - de maneira profunda e compreensiva</li>
+        <li>Index - criar um índice das páginas</li>
+        <li>Rank - servir as páginas com as mais relevantes primeiro</li>
+    </ul>
+    <p>Como vamos estudar? (Simplificação)</p>
+    <ul class="build">
+        <li>Crawling stage</li>
+        <li>Ranking stage</li>
+        <li>Querying</li>
+    </ul>
+
+    </article>
+  </slide>
+
+  <slide >
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3>Principais Componentes</h3>
+    </hgroup>
+    <article>
+      <table>
+        <tr>
+            <th></th><th>Crawling Stage</th><th>Ranking Stage</th><th>Querying (Busca)</th>
+        </tr>
+        <tr>
+        <td></td>
+        <td class="build" valign=top>
+            <li>Consome</li>
+                <ul> <li>Seed (url semente)</li> </ul>
+            <li>Produz</li>
+            <ul>
+                <li>Index</li>
+                <li>Graph</li>
+            </ul>
+        </td>
+        <td class="build">
+            <li>Consome</li>
+                <ul><li>Graph</li></ul>
+            <li>Produz</li>
+                <ul> <li>Rank</li> </ul>
+            </ul>
+        </td>
+        <td class="build">
+            <li>Consome</li>
+                <ul>
+                    <li>Rank</li>
+                    <li>Graph</li>
+                </ul>
+            <li>Produz</li>
+                <ul> <li>Result Set</li> </ul>
+        </td>
+        </tr>
+      </table>
+    </article>
+  </slide>
+
+  <slide >
+    <aside class="note">
+      <section>
+        <ul>
+          <li>Programa que coleta conteúdo na web</li>
+          <li>Encontra páginas a partir de uma "seed page"</li>
+          <li>Avança aos links de outras páginas contidas nessa "seed page"</li>
+          <li>Continua avançando aos links de outras páginas encontradas</li>
+          <li>Até que tenha encontrado várias páginas </li>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><b>Crawler</b>, Rank, Query</h3>
+    </hgroup>
+    <article>
+    <p>
+    Crawler é um componente (programa) responsável por <b>coletar conteúdo na web</b>.
+      </p>
+      <ul class="build">
+          <li>Encontra links a partir da "seed page"</li>
+          <li>Avança para páginas dos links da "seed page"</li>
+          <li>Prossegue avançando nos novos links das novas páginas encontradas (recursivamente)</li>
+          <li>Até que tenha encontrado várias páginas </li>
+      </ul>
+      <p>Acompanhe o desenho.</p>
+    </article>
+  </slide>
+
+  <slide >
+    <aside class="note">
+      <section>
+        <ul>
+        </ul>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><strike>Crawler</strike>, Graph, Query</h3>
+    </hgroup>
+    <article>
+    <p>Index é uma <b>estrutura de dados</b>, tipo hash, utilizada pelo Crawler para...
+    </p>
+      <ul class="build">
+        <li><b>Armazenar o conteúdo das páginas</b> (o quê é!)</li>
+        <li><b>Recuperação dos links por palavra-chave</b> (a que serve!)</li>
+        <li><b>Hash</b> (como!)</li>
+        <li>Chave (key) - uma para cada palavra</li>
+        <li>Valor (value) - urls</li>
+      </ul>
+      <pre class="auto-fadein prettyprint" data-lang="Python">
+&gt;&gt;&gt;index_test = {
+"chave": ["valor"], "foo": ["http://foobar"],
+"foobar": ["http://foobar"], "bar": ["http://foo", "http://bar"]}
+&gt;&gt;&gt;print index_test
+{'chave': 'valor', 'foo': 'http://foobar', 'foobar': 'http://foobar', 
+'bar': ['http://foo', 'http://bar']}
+</pre>
+    </article>
+  </slide>
+
+  <slide >
+    <aside class="note">
+      <section>
+        <li>toda vez que voce procura qualquer coisa no google, "britney
+        spears", "michael jackson", etc</li>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><b>Crawler</b>, Rank, Query</h3>
+    </hgroup>
+    <article>
+    <p>Exemplo:
+    Procurando por "kate perry"
+    </p>
+      <pre class="auto-fadein prettyprint" data-lang="Python">
+{'kate': [1, <b>2</b>, 81, <b>555</b>, 789],
+'perry': [<b>2</b>, 8, 73, <b>555</b>, 1000]}
+</pre>
+    </br>
+      <p class="build">
+      Essa fase, chama-se:
+      <b>Seleção de Documento</b>
+      </p>
+    </article>
+  </slide>
+
+  <slide >
+    <aside class="note">
+      <section>
+        <li>fase de rank</li>
+        <li>imagine um resultado com milhoes</li>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><strike>Crawler</strike>, <b>Rank</b>, Query</h3>
+    </hgroup>
+    <article>
+      <ul class="build">
+      <li>Algoritmo que mede a reputação de uma página: <b>PageRank</b>&reg;</li>
+      <li>Ordena páginas por relevância</li>
+      <li>Consome <b>Graph</b>, produz Ranks</li>
+      </ul>
+    <p><b>Graph</b></p>
+      <pre class="auto-fadein prettyprint" data-lang="Python">
+{ 'http://foo'    : ['http://foobar', 'http://bar'],
+  'http://bar'    : ['http://foobar'],
+  'http://foobar' : ['http://bar', 'http://foo'] }
+</pre>
+    <p><b>Rank</b></p>
+      <pre class="auto-fadein prettyprint" data-lang="Python">
+{ 'http://foo'    : <b>0.9999</b>
+  'http://bar'    : <b>0.7483</b>
+  'http://foobar' : <b>0.3737</b>
+</pre>
+    </article>
+  </slide>
+
+  <slide >
+    <aside class="note">
+      <section>
+        <li>fase de search</li>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><strike>Crawler</strike>, <strike>Rank</strike>, <b>Query</b></h3>
+    </hgroup>
+    <article>
+    <div class="columns-2">
+      <ul> 
+      <li>Consome Index e Ranks</li>
+      <li>Consulta Index</li>
+      <li>Resultados da consulta no index</li>
+      </ul>
+      <ul>
+      <li>Ordena de acordo com rank</li>
+      <li>Exibe</li>
+      </ul>
+      </div>
+    <p><b>Index</b></p>
+      <pre class="prettyprint" data-lang="Python">
+{'kate': [1, <b>2</b>, 81, <b>555</b>, 789],
+'perry': [<b>2</b>, 8, 73, <b>555</b>, 1000]}
+</pre>
+
+    <p><b>Rank</b></p>
+      <pre class="prettyprint" data-lang="Python">
+{ 'http://foo'    : <b>0.9999</b>
+  'http://bar'    : <b>0.7483</b>
+  'http://foobar' : <b>0.3737</b>
+</pre>
+    </article>
+  </slide>
+
+  <slide >
+    <aside class="note">
+      <section>
+        <li>imagem de resumo</li>
+      </section>
+    </aside>
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><b>Crawler</b>, <b>Rank</b>, <b>Query</b></h3>
+    </hgroup>
+    <article class="flexbox vcenter">
+    <img class="reflect" src="images/googlesearch.png" alt="GoogleSearch" title="GoogleSearch" width="95%" height="95%">
+      <footer class="source">Fonte: Udacity CS101</footer>
+    </article>
+  </slide>
+
+  <slide >
+    <hgroup>
+      <h2>Como funciona um Search Engine</h2>
+      <h3><strike>Crawler</strike>, <strike>Rank</strike>, <strike>Query</strike></h3>
+    </hgroup>
+    <article>
+    <p>Saiba mais:</br>
+    <a href="http://www.youtube.com/watch?v=KyCYyoGusqs">http://www.youtube.com/watch?v=KyCYyoGusqs</a>
+    </p>
+    </article>
+  </slide>
+
+  <slide >
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>História e Visão geral dos módulos Qt</strike></li>
+        <li><strike>Introdução ao Git & Preparação do ambiente</strike></li>
+        <li><strike>Introdução ao qmake & Construção em Qt</strike></li>
+        <li><strike>Projeto: construção do Hello World</strike></li>
+        <li><strike>Como funciona um Search Engine</strike></li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/trolltech.jpg"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Grato!</h2>
+      <!-- <p>Important contact information goes here.</p> -->
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/chocolate_logo_128.png"></span>
+    </article>
+  </slide>
+
+  <slide hidden class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+
+<!-- vim: set ts=2 sw=2 et fileencoding=latin1:
