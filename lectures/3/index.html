@@ -1,0 +1,341 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/chocolate_logo_128.png"></span>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+    </hgroup>
+    <article class="smaller flexbox vright">
+    </br> </br> </br> </br>
+    </br> </br> </br> </br>
+    </br> </br> </br> </br>
+    </br> </br> </br>
+    <p style="font-size: 50%;">Copyright &copy; 2013 Chocolate Software Labs.</br>
+    Todos os direitos reservados.</br></br>
+    Nenhuma parte deste website ou de quaisquer de seus conteúdos podem ser
+    reproduzidos, copiados, compartilhados em redes sociais, modificados ou
+    adaptados, sem consentimento expresso prévio de Chocolate Software Labs ou
+    seus representantes legais.
+    </p>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <!-- qtnetwork_agenda -->
+  <slide>
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>API de Database SQL (QtSQL)</strike></li>
+        <li><strike>API de Streamming HTML/XML (QtXML)</strike></li>
+        <li><b>I/O de Rede (QtNetwork)</b></li>
+        <li>Lab: construção da classe Crawler</li>
+        <li>Lab: GUI para o Search Engine</li>
+      </ul>
+    </article>
+  </slide>
+
+  <!-- qtnetwork_segue -->
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+  </slide>
+
+  <!-- qtnetwork_slide1 -->
+  <slide>
+    <hgroup>
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+    <article>
+    <p><b>QNetworkAccessManager</b></p>
+    <ul>
+      <li>Interface para enviar "requests" e receber "replies" pela rede</li>
+      <li>QFtp implementa um client FTP</li>
+    </ul>
+    <p><b>QTcpSocket e QTcpServer</b></p>
+    <ul>
+      <li>Interfaces de alto-nível para sockets TCP</li>
+    </ul>
+    <p><b>QUdpSocket</b></p>
+    <ul>
+      <li>Interface de alto-nível para sockets UDP</li>
+    </ul>
+    <p><b>QNetworkAccessManager</b></p>
+    <ul>
+      <li>Dá pra, por exemplo, acessar conteúdo na web sem GUI</li>
+    </ul>
+    </article>
+  </slide>
+
+  <!-- qtnetwork_slide2 -->
+  <slide>
+    <hgroup>
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+    <article>
+    <p><b>QNetworkAccessManager</b> (a fundo)</p>
+    <ul>
+      <li>Gerencia "requests" (requisições) e "replies" (respostas)</li>
+      <li>"Cachear" de conteúdo</li>
+      <li>Armazenar cookies</li>
+      <li>Gerenciar proxies</li>
+      <li>Traduzir protocolos</li>
+    </ul>
+    </article>
+  </slide>
+
+  <!-- qtnetwork_slide3 -->
+  <slide>
+    <hgroup>
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+    <article>
+    <p><b>Classes para I/O de Rede</b> (visão geral)</p>
+    <img class="reflect" src="images/networkclasses.png" alt="Classes para I/O de Rede" title="Classes para I/O de Rede" width="95%" height="65%">
+    </article>
+  </slide>
+
+  <!-- qtnetwork_slide4 -->
+  <slide >
+    <hgroup>
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+    <article>
+    <p><b>Protocolos</b></p>
+    <ul>
+      <li>Para navegar na web usa-se o protocolo HTTP</li>
+      <li>HTTP edifica-se acima do TCP, que por sua vez edifica-se acima do
+      IP</li>
+      <li>Há diversos outros protocolos edificados acima do TCP/IP: FTP, SMTP,
+      POP, IMAP</li>
+    </article>
+  </slide>
+
+  <!-- qtnetwork_slide5 -->
+  <slide >
+    <hgroup>
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+    <article>
+    <p><b>QUrl</b></p>
+    <ul>
+      <li>QUrl pode ser utilizada para dividir uma URL em partes</li>
+    </ul>
+      <pre class="prettyprint" data-lang="C++">
+      http://www.udacity.com/cs101x/index.html
+
+      /*
+       * scheme - http:
+       * host   - www.udacity.com
+       * path   - /cs101x/index.html
+       */
+
+      QUrl url("http://www.udacity.com/cs101x/index.html");
+      QString host = url.host();
+      QString path = url.path();</pre>
+    </article>
+  </slide>
+
+  <!-- qtnetwork_slide6 -->
+  <slide >
+    <hgroup>
+      <h2>I/O de Rede (QtNetwork)</h2>
+    </hgroup>
+    <article>
+    <p><b>Exercício - ex-webbrowser</b></p>
+    <ul>
+      <li>Implementar getPage()</li>
+      <li>Implementar getNextUrl()</li>
+    </article>
+  </slide>
+
+  <!-- labcrawler_agenda -->
+  <slide >
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>API de Database SQL (QtSQL)</strike></li>
+        <li><strike>API de Streamming HTML/XML (QtXML)</strike></li>
+        <li><strike>I/O de Rede (QtNetwork)</strike></li>
+        <li><b>Lab: construção da classe Crawler</b></li>
+        <li>Lab: GUI para o Search Engine</li>
+      </ul>
+    </article>
+  </slide>
+
+  <!-- labcrawler_segue -->
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Lab: construção da classe Crawler</h2>
+    </hgroup>
+  </slide>
+
+  <!-- labcrawler_slide1 -->
+  <slide >
+    <hgroup>
+      <h2>Lab: construção da classe Crawler</h2>
+    </hgroup>
+    <article>
+    <p>Algoritmo do crawler</p>
+    <pre class="prettyprint" data-lang="C++">
+crawlWeb(QUrl seed) {
+    fila.enqueue(seed)
+    while (fila) {
+        url = fila.dequeue()
+        if (ja_baixou(url))
+            continue;
+
+        <b>getPage(url, conteudo)            // implementar</b>
+        addPageToIndex(url, conteudo)
+        <b>getAllLinks(conteudo, linkslist)  // implementar getNextUrl()</b>
+        addLinksToGraph(url, linkslist)
+        fila.enqueue(linkslist)
+        ja_baixou.append(url)
+    }
+}</pre>
+    </article>
+  </slide>
+
+  <!-- labgui_agenda -->
+  <slide >
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>API de Database SQL (QtSQL)</strike></li>
+        <li><strike>API de Streamming HTML/XML (QtXML)</strike></li>
+        <li><strike>I/O de Rede (QtNetwork)</strike></li>
+        <li><strike>Lab: construção da classe Crawler</strike></li>
+        <li><b>Lab: GUI para o Search Engine</b></li>
+      </ul>
+    </article>
+  </slide>
+
+
+  <!-- labgui_segue -->
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/trolltech.jpg"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Lab: GUI para o Search Engine</h2>
+    </hgroup>
+  </slide>
+
+  <!-- labgui_slide1 -->
+  <slide >
+    <hgroup>
+      <h2>Lab: GUI para o Search Engine</h2>
+    </hgroup>
+    <article>
+    <p><b>se-gui</b></p>
+    </article>
+  </slide>
+
+
+  <!-- finish_agenda -->
+  <slide >
+    <hgroup>
+      <h2>Hoje</h2>
+      <h3>Agenda</h3>
+    </hgroup>
+    <article>
+      <ul>
+        <li><strike>API de Database SQL (QtSQL)</strike></li>
+        <li><strike>API de Streamming HTML/XML (QtXML)</strike></li>
+        <li><strike>I/O de Rede (QtNetwork)</strike></li>
+        <li><strike>Lab: construção da classe Crawler</strike></li>
+        <li><strike>Lab: GUI para o Search Engine</strike></li>
+      </ul>
+    </article>
+  </slide>
+
+  <!-- thankyou_slide -->
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/trolltech.jpg"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Grato!</h2>
+      <!-- <p>Important contact information goes here.</p> -->
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/chocolate_logo_128.png"></span>
+    </article>
+  </slide>
+
+  <slide hidden class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
+<!-- vim: set ts=2 sw=2 et: -->
