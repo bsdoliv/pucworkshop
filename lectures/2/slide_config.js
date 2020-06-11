@@ -3,7 +3,7 @@ var SLIDE_CONFIG = {
   settings: {
     title: 'Introdução a Qt/C++',
     subtitle: 'Construindo um Search Engine',
-    eventTitle: 'Módulo 1: Boas vindas e Introdução à Qt (2013.04 / Computação PUC-SP)',
+    eventTitle: 'Módulo 1: Boas vindas e Introdução a Qt (Computação PUC-SP)',
     useBuilds: true, // Default: true. False will turn off slide animation builds.
     usePrettify: true, // Default: true
     enableSlideAreas: true, // Default: true. False turns off the click areas on either slide of the slides.

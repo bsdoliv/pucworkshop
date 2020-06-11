@@ -26,11 +26,13 @@ URL: https://code.google.com/p/io-2012-slides
 
 <slides class="layout-widescreen">
 
+<!--
   <slide class="logoslide nobackground">
     <article class="flexbox vcenter">
-      <span><img src="images/chocolate_logo_128.png"></span>
+      <span><img src="http://quartix.io/img/bann.png"></span>
     </article>
   </slide>
+-->
 
   <slide>
     <hgroup>
@@ -40,12 +42,12 @@ URL: https://code.google.com/p/io-2012-slides
     </br> </br> </br> </br>
     </br> </br> </br> </br>
     </br> </br> </br>
-    <p style="font-size: 50%;">Copyright &copy; 2013 Chocolate Software Labs.</br>
+    <p style="font-size: 50%;">Copyright &copy; 2020 quartix.io</br>
     Todos os direitos reservados.</br></br>
     Nenhuma parte deste website ou de quaisquer de seus conteúdos podem ser
     reproduzidos, copiados, compartilhados em redes sociais, modificados ou
-    adaptados, sem consentimento expresso prévio de Chocolate Software Labs ou
-    seus representantes legais.
+    adaptados, sem consentimento expresso prévio de quartix.io ou seus
+    representantes legais.
     </p>
     </article>
   </slide>
@@ -111,11 +113,11 @@ URL: https://code.google.com/p/io-2012-slides
     <article>
     <p>Comandos Git</p>
       <ul>
-        <li>Clone</li>
+        <li>Clone (network sync)</li>
         <li>Edit/Add</li>
-        <li>Commit</li>
-        <li>Pull</li>
-        <li>Push</li>
+        <li>Commit (version control)</li>
+        <li>Fetch/Rebase (network sync)</li>
+        <li>Push (network sync)</li>
       </ul>
     </article>
   </slide>
@@ -128,13 +130,14 @@ URL: https://code.google.com/p/io-2012-slides
     <article>
     <p>Comandos Git</p>
       <ul>
-        <li><b>Clone</b> (substitua o nome do seu usuario)</li>
+        <li><b>Clone</b> (network sync)</li>
         <pre class="prettyprint" data-lang="Shell">
+# substitua o nome do seu usuario
 git clone https://nome_do_usuario@bitbucket.org/qtlabmeetup/qtlabworkshop.git</pre>
         <li>Edit/Add</li>
-        <li>Commit</li>
-        <li>Pull</li>
-        <li>Push</li>
+        <li>Commit (version control)</li>
+        <li>Fetch/Rebase (network sync)</li>
+        <li>Push (network sync)</li>
       </ul>
     </article>
   </slide>
@@ -147,15 +150,15 @@ git clone https://nome_do_usuario@bitbucket.org/qtlabmeetup/qtlabworkshop.git</p
     <article>
     <p>Comandos Git</p>
       <ul>
-        <li>Clone</li>
+        <li>Clone (network sync)</li>
         <li><b>Edit/Add</b></li>
         <pre class="prettyprint" data-lang="Shell">
 cd qtlabworkshop && git status
 mkdir students/seu_nome && git status
 touch students/seu_nome/.gitkeep && git status
-git add students && git status</pre>
-        <li>Commit</li>
-        <li>Pull</li>
+git add students/seu_nome && git status</pre>
+        <li>Commit (version control)</li>
+        <li>Fetch/Rebase (network sync)</li>
         <li>Push</li>
       </ul>
     </article>
@@ -169,11 +172,11 @@ git add students && git status</pre>
     <article class="smaller">
     <p>Comandos Git</p>
       <ul>
-        <li>Clone</li>
+        <li>Clone (network sync)</li>
         <li>Edit/Add</li>
-        <li><b>Commit</b></li>
+        <li><b>Commit</b> (version control)</li>
         <pre class="prettyprint" data-lang="Shell">
-git commit -am'importando students/seu_nome'
+git commit -m'importando students/seu_nome'
 git status
 # not pushed yet
 
@@ -181,8 +184,8 @@ git status
 git config --global user.name "seu_nome"
 git config --global user.email seuemail@seuprovedor.com
 git commit --amend --reset-author</pre>
-        <li>Pull</li>
-        <li>Push</li>
+        <li>Fetch/Rebase (network sync)</li>
+        <li>Push (network sync)</li>
       </ul>
     </article>
   </slide>
@@ -195,12 +198,13 @@ git commit --amend --reset-author</pre>
     <article>
     <p>Comandos Git</p>
       <ul>
-        <li>Clone</li>
+        <li>Clone (network sync)</li>
         <li>Edit/Add</li>
-        <li>Commit</li>
-        <li><b>Pull</b></li>
+        <li>Commit (version control)</li>
+        <li><b>Fetch/Rebase</b> (network sync)</li>
         <pre class="prettyprint" data-lang="Shell">
-git pull origin master</pre>
+git fetch origin -p
+git rebase origin/master</pre>
         <li>Push</li>
       </ul>
     </article>
@@ -214,11 +218,11 @@ git pull origin master</pre>
     <article>
     <p>Comandos Git</p>
       <ul>
-        <li>Clone</li>
+        <li>Clone (network sync)</li>
         <li>Edit/Add</li>
-        <li>Commit</li>
-        <li>Pull</li>
-        <li><b>Push</b></li>
+        <li>Commit (version control)</li>
+        <li>Fetch/Rebase (network sync)</li>
+        <li><b>Push</b> (network sync)</li>
         <pre class="prettyprint" data-lang="Shell">
 git push origin master</pre>
       </ul>
@@ -233,7 +237,7 @@ git push origin master</pre>
     <article class="smaller">
     <p>Comandos Git - Sumário</p>
       <ul>
-        <li>Clone
+        <li>Clone (network sync)
         <pre class="prettyprint" data-lang="Shell">
 git clone url</pre>
         </li>
@@ -241,15 +245,16 @@ git clone url</pre>
         <pre class="prettyprint" data-lang="Shell">
 git add new_files</pre>
         </li>
-        <li>Commit
+        <li>Commit (version control)
         <pre class="prettyprint" data-lang="Shell">
 git commit -am'message'</pre>
         </li>
-        <li>Pull
+        <li>Fetch/Rebase (network sync)
         <pre class="prettyprint" data-lang="Shell">
-git pull origin master</pre>
+git fetch -p origin
+git rebase origin/master</pre>
         </li>
-        <li>Push
+        <li>Push (network sync)
         <pre class="prettyprint" data-lang="Shell">
 git push origin master</pre>
         </li>
@@ -269,7 +274,7 @@ git push origin master</pre>
         <li>Baixe novamente o repositório qtlabmeetup/qtlabworkshop.git</li>
         <li>Crie seu próprio diretório, conforme orientado nos slides</li>
         <li>Efetue o commit</li>
-        <li>Sincronize com o servidor (Pull/Push)</li>
+        <li>Sincronize com o servidor (Fetch/Push)</li>
       </ul>
       <p>Saiba mais:</p>
       <a href="https://www.udacity.com/wiki/using_git">https://www.udacity.com/wiki/using_git</a>
